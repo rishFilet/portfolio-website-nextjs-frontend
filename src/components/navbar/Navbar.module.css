@@ -1,0 +1,72 @@
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--padding-small) var(--padding-normal);
+  padding-right: var(--padding-large);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: var(--navbar-height);
+  & div:first-child {
+    display: flex;
+    justify-content: flex-start;
+  }
+  & div:last-child {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 1300px) {
+  .navbar {
+    display: flex;
+    padding: var(--padding-small);
+    justify-content: space-between;
+  }
+}
+
+.menuItemsContainer {
+  display: flex;
+  gap: var(--gap-normal);
+  align-items: center;
+  justify-content: center;
+  .becomeAMember {
+    color: var(--color-primary-yellow);
+    font-weight: var(--font-weight-bold);
+    text-transform: capitalize;
+  }
+}
+
+.menuItem {
+  color: var(--color-primary-light);
+  text-decoration: none;
+}
+
+.logo {
+  height: 100%;
+  position: relative;
+  padding-right: 10%;
+}
+
+.actionButton {
+  padding-top: var(--padding-small);
+  padding-bottom: var(--padding-small);
+  padding-left: var(--padding-normal);
+  padding-right: var(--padding-normal);
+}
+
+.hamburgerMenu {
+  display: block;
+  cursor: pointer;
+  height: calc(var(--navbar-height) - 2 * var(--padding-normal));
+  padding-right: var(--padding-normal);
+}
+
+.hamburgerMenuIcon {
+  color: var(--color-primary-light);
+  height: 100%;
+  width: 100%;
+}
