@@ -2,9 +2,10 @@
 
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
-import { useWindowWidth } from 'frontend/src/lib/hooks/useWindowWidth';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
+import { useWindowWidth } from '@/lib/hooks/useWindowWidth';
 
 import styles from './Navbar.module.css';
 

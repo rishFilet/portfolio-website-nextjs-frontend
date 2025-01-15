@@ -1,7 +1,8 @@
 import { Theme } from '@radix-ui/themes';
-import Navigation from 'frontend/src/components/navigation/Navigation';
 import { Indie_Flower, Inter, Oswald, Qwigley, Roboto_Condensed } from 'next/font/google';
 import Script from 'next/script';
+
+import Navigation from '@/components/navigation/Navigation';
 
 import styles from './layout.module.css';
 import MetadataConstants from './metadata';

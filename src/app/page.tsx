@@ -1,5 +1,6 @@
-import PageContainer from 'frontend/src/components/pageContainer/PageContainer';
 import Image from 'next/image';
+
+import PageContainer from '@/components/pageContainer/PageContainer';
 
 import styles from './page.module.css';
 
