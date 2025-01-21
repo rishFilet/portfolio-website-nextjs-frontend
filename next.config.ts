@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import { z } from 'zod';
 
 import type { NextConfig } from 'next';
@@ -11,6 +12,19 @@ const Config = z.object({
 Config.parse(process.env);
 
 const nextConfig: NextConfig = {
+  webpack: (config) => {
+    config.plugins = [
+      ...(config.plugins ?? []),
+      new webpack.BannerPlugin({
+        banner: '@layer reset, root, layout, component, page;',
+        test: /\.s?css$/,
+        raw: true,
+        entryOnly: false,
+      }),
+    ];
+
+    return config;
+  },
   env: {
     BASE_API_URL: process.env.BASE_API_URL,
     STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,

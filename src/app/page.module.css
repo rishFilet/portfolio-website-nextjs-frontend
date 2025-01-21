@@ -1,18 +1,15 @@
 @layer page {
   .homePage {
     display: grid;
-    grid-template-rows: 0.7fr auto;
+    grid-template-rows: 1fr auto;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin-top: 4rem;
-    padding-bottom: var(--padding-small);
+    height: 100%;
   }
 
   .heroImageContainer {
     height: 100%;
     width: 100%;
-    padding: var(--padding-normal);
   }
   .contentContainer {
     height: 100%;
@@ -21,6 +18,7 @@
   .heroText {
     display: flex;
     flex-direction: column;
+    padding-top: 1.2rem;
     & h1 {
       font-weight: var(--fw-700);
       font-size: 4em;

@@ -9,7 +9,6 @@ export type Params = Promise<{
 }>;
 
 const BlogPostPage = async ({ params }: { params: Params }) => {
-  console.log(params);
   const { slug } = await params;
 
   const post = await getBlogPostsBySlug(slug);

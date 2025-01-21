@@ -6,7 +6,7 @@ import { calculateReadingTime } from '@/lib/utils/string.helpers';
 
 const Blog = async () => {
   const blogPosts = await getBlogPosts();
-
+  console.log(blogPosts);
   return (
     <PageContainer>
       {blogPosts.map((data: BlogDataType) => {

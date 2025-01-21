@@ -7,17 +7,16 @@ import clsx from 'clsx';
 import { Indie_Flower, Inter, Oswald, Qwigley, Roboto_Condensed } from 'next/font/google';
 import Script from 'next/script';
 
-library.add(fas, far, fab);
+import '@/styles/reset.css'; // Import reset styles first
+import '@/styles/globals.css'; // Import global styles next
 
-import '@/styles/layer-order.css';
-import '@/styles/globals.css';
-
-import styles from '@/app/layout.module.css';
+import styles from '@/app/layout.module.css'; // Import layout styles
 import { Providers } from '@/app/providers';
-import Navigation from '@/components/navigation/Navigation';
+import Navigation from '@/components/navigation/Navigation'; // Import component styles
 import { getThemes } from '@/lib/api/api.helpers';
 import type { MediaFormatType, ThemeDataType } from '@/lib/api/api.types';
 import { getCurrentTheme } from '@/lib/utils/theme.server';
+library.add(fas, far, fab);
 
 import MetadataConstants from './metadata';
 

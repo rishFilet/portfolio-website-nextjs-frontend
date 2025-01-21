@@ -1,7 +1,6 @@
 'use client';
 
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import clsx from 'clsx';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -33,7 +32,7 @@ const Navbar = (props: NavbarProps) => {
   }, [props, isMobile]);
 
   return (
-    <nav className={clsx(styles.navbar)}>
+    <nav className={styles.navbar}>
       {!isMobile && (
         <>
           <div className={styles.logo}>LOGO</div>
