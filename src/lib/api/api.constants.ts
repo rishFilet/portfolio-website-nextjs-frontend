@@ -14,6 +14,7 @@ export const successStatusCodes: Record<HttpMethod, number> = {
 export const API_IDS = {
   landingPage: 'landing-page',
   themeData: 'themes',
+  blogPosts: 'blog-posts',
 } as const;
 
 export const DEFAULT_THEME = 'light';

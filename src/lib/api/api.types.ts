@@ -12,11 +12,7 @@ export type MediaFormatType = {
   width: number;
 };
 
-export type ThemeDataType = {
-  accentColorHexCode: string;
-  fontAwesomeIcon: string;
-  fontColorHexCode: string;
-  heroImage: {
+export type MediaType = {
     alternativeText: string;
     formats: {
       large: MediaFormatType;
@@ -25,6 +21,12 @@ export type ThemeDataType = {
       thumbnail: MediaFormatType;
     };
   } & MediaFormatType;
+
+export type ThemeDataType = {
+  accentColorHexCode: string;
+  fontAwesomeIcon: string;
+  fontColorHexCode: string;
+  heroImage: MediaType;
   primaryColorHexCode: string;
   secondaryColorHexCode: string;
   uniqueName: string;
@@ -37,14 +39,12 @@ export type LandingPageDataType = {
 };
 
 export type BlogDataType = {
-  cardDescription: string;
-  footer: {
-    postedDate: string;
-    readTime: string;
-  };
-  imageSrc: string;
-  link: string;
+  createdAt: string;
+  likes: number;
   postContent: string;
+  postImages: MediaType[];
+  postSummary: string;
+  slug: string;
   tags?: string[];
   title: string;
 };

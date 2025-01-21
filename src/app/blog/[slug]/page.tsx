@@ -1,21 +1,40 @@
+import { API_IDS } from '@/lib/api/api.constants';
+import { getBlogPostsBySlug, getStrapiData } from '@/lib/api/api.helpers';
 import { BlogDataType } from '@/lib/api/api.types';
 
 import styles from './page.module.css';
 
-type BlogPostPageProps = {
-  blogData: BlogDataType;
+export type BlogPostPageProps = {
+  slug: string;
 };
 
-const BlogPostPage = (props: BlogPostPageProps) => {
-  const { cardDescription, footer, imageSrc, postContent, tags, title } = props.blogData;
+const BlogPostPage = async ({ params }: { params: BlogPostPageProps }) => {
+  const { slug } = params;
+
+  const post = await getBlogPostsBySlug(slug);
+
   return (
     <div className={styles.blogPostContainer}>
-      <h3>Blog Post</h3>
-      <h6>Published on: 2021-09-01 / Read time: 5min</h6>
-      <div className={styles.tagsContainer}></div>
-      <div className={styles.blogPostContentContainer}></div>
+      <h3>{post ? post.title : 'Post not found'}</h3>
+      {post && (
+        <>
+          <h6>Published on: 2021-09-01 / Read time: 5min</h6>
+          <div className={styles.tagsContainer}>{post.tags}</div>
+          <div className={styles.blogPostContentContainer}></div>
+        </>
+      )}
     </div>
   );
 };
 
 export default BlogPostPage;
+
+export async function generateStaticParams() {
+  const posts = await getStrapiData<BlogDataType[]>({
+    endpoint: API_IDS.blogPosts,
+  });
+
+  return posts.map((post: BlogDataType) => ({
+    slug: post.slug,
+  }));
+}

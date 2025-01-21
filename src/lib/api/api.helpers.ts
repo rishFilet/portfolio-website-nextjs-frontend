@@ -10,7 +10,7 @@ import {
   successStatusCodes,
 } from './api.constants';
 
-import type { GetStrapiDataParams, ThemeDataType } from './api.types';
+import type { BlogDataType, GetStrapiDataParams, ThemeDataType } from './api.types';
 
 export async function apiHandler<T>(request: Request): Promise<Record<string, T>> {
   try {
@@ -61,4 +61,10 @@ export const getThemeByName = cache(async (themeName: string) => {
   const themes = await getThemes();
 
   return themes.find((theme) => theme.uniqueName === themeName);
+});
+
+export const getBlogPostsBySlug = cache(async (slug: string) => {
+  const posts = await getStrapiData<BlogDataType[]>({ endpoint: API_IDS.blogPosts });
+
+  return posts.find((post) => post.slug === slug);
 });
