@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 const MetadataConstants: Metadata = {
-  title: 'Break Time Muay Thai',
+  title: 'Rishi Khan Creative Engineer',
   description:
     'Welcome to Break Time Muay Thai. We are a small Muay Thai Gym that focuses on Wellness, Small Group & Private Training.',
   openGraph: {

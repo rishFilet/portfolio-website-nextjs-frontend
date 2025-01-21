@@ -1,14 +1,26 @@
-import { Theme } from '@radix-ui/themes';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import clsx from 'clsx';
 import { Indie_Flower, Inter, Oswald, Qwigley, Roboto_Condensed } from 'next/font/google';
 import Script from 'next/script';
 
-import Navigation from '@/components/navigation/Navigation';
+library.add(fas, far, fab);
 
-import styles from './layout.module.css';
+import '@/styles/layer-order.css';
+import '@/styles/globals.css';
+
+import styles from '@/app/layout.module.css';
+import { Providers } from '@/app/providers';
+import Navigation from '@/components/navigation/Navigation';
+import { getThemes } from '@/lib/api/api.helpers';
+import type { MediaFormatType, ThemeDataType } from '@/lib/api/api.types';
+import { getCurrentTheme } from '@/lib/utils/theme.server';
+
 import MetadataConstants from './metadata';
 
-import '@radix-ui/themes/styles.css';
-import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -44,11 +56,40 @@ const qwigley = Qwigley({
 
 export const metadata = MetadataConstants;
 
+export const initialMediaFormat: MediaFormatType = {
+  height: 0,
+  name: '',
+  url: '',
+  width: 0,
+};
+export const initialThemeData: ThemeDataType = {
+  uniqueName: 'none',
+  fontAwesomeIcon: 'sun',
+  primaryColorHexCode: '#000000',
+  secondaryColorHexCode: '#ffffff',
+  fontColorHexCode: '#000000',
+  accentColorHexCode: '#ffffff',
+  heroImage: {
+    alternativeText: '',
+    formats: {
+      small: initialMediaFormat as MediaFormatType,
+      medium: initialMediaFormat as MediaFormatType,
+      large: initialMediaFormat as MediaFormatType, 
+      thumbnail: initialMediaFormat as MediaFormatType,
+    },
+    ...initialMediaFormat, 
+  },
+};
+
 const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const themeData = await getThemes();
+  const initialTheme =
+    await getCurrentTheme();
+
   return (
     <>
       <html
@@ -57,12 +98,12 @@ const RootLayout = async ({
       >
         <body className={inter.className}>
           <Script src="https://kit.fontawesome.com/7e82cbbb97.js" strategy="afterInteractive" />
-          <Theme>
-            <div className={styles.siteContainer}>
+          <Providers theme={initialTheme} allThemes={themeData}>
+            <div className={clsx(styles.siteContainer, initialTheme.uniqueName === 'none' && styles.loading)}>
               <Navigation />
-              <main className={styles.main}>{children}</main>
+              <main className={clsx(styles.main, initialTheme.uniqueName === 'none' && styles.loading)}>{children}</main>
             </div>
-          </Theme>
+          </Providers>
         </body>
       </html>
     </>

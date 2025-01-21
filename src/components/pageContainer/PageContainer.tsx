@@ -1,13 +1,13 @@
 import styles from './PageContainer.module.css';
 
-const pageContainer = ({
+async function pageContainer({
   children,
   className,
 }: {
   children: React.ReactNode;
   className?: string;
-}) => {
-  return <div className={className ? className : styles.container}>{children}</div>;
-};
+}) {
+  return <section className={className ? className : styles.container}>{children}</section>;
+}
 
 export default pageContainer;

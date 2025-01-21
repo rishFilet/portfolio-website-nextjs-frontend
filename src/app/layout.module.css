@@ -1,13 +1,19 @@
-.siteContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100vh;
-}
+@layer layout {
+  /* .loading {
+    display: none;  
+    transition: all 0.2s fade-in;
+  } */
+  .siteContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  }
 
-.main {
-  display: flex;
-  flex-direction: inherit;
-  align-items: center;
-  flex: 1;
+  .main {
+    display: flex;
+    flex-direction: inherit;
+    align-items: center;
+    flex: 1;
+  }
 }

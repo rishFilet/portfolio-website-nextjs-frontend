@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 
 import { useWindowWidth } from '@/lib/hooks/useWindowWidth';
 
+import { ThemeSwitcher } from '../themeSwitcher/ThemeSwitcher';
+
 import styles from './Navbar.module.css';
 
 type NavbarProps = {
@@ -21,7 +23,6 @@ const initialData: NavbarProps = {
 
 const Navbar = (props: NavbarProps) => {
   const [propsData, setPropsData] = useState<NavbarProps>(initialData);
-
   const { width, isMobile } = useWindowWidth();
   // Update state when props change
   useEffect(() => {
@@ -36,6 +37,7 @@ const Navbar = (props: NavbarProps) => {
       {!isMobile && (
         <>
           <div className={styles.logo}>LOGO</div>
+          <ThemeSwitcher />
           <div className={styles.menuItemsContainer}>
             <Link href="/blog">Blog</Link>
             <Link href="/about">About</Link>
@@ -43,8 +45,9 @@ const Navbar = (props: NavbarProps) => {
         </>
       )}
       {isMobile && (
-        <div className={styles.hamburgerMenu}>
-          <button onClick={props.toggleSidebar}>
+        <div className={styles.mobileNavbar}>
+          <ThemeSwitcher />
+          <button onClick={props.toggleSidebar} className={styles.hamburgerMenuButton}>
             <HamburgerMenuIcon className={styles.hamburgerMenuIcon} />
           </button>
         </div>

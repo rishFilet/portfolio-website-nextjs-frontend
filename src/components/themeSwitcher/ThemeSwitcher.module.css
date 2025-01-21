@@ -1,0 +1,40 @@
+@layer component {
+  .themeSwitchContainer {
+    display: flex;
+    gap: 0.7rem;
+  }
+
+  .themeSwitchButton {
+    height: 2.8rem;
+    width: 2.8rem;
+    background: none;
+  }
+
+  .themeSwitchButton:focus {
+    background-color: transparent;
+  }
+
+  .themeIcon {
+    align-content: center;
+    font-size: 2rem;
+    color: var(--color-accent);
+    height: 100%;
+    width: 100%;
+  }
+
+  .activeThemeIcon {
+    background-color: var(--color-accent);
+    color: var(--color-secondary);
+    padding: 0.2em;
+    border-radius: 0.2em;
+    transition: all 0.2s ease-in;
+  }
+
+  .isLoadingAndActive {
+    background-color: var(--color-disabled);
+    color: var(--color-secondary);
+  }
+  .isLoadingAndInactive {
+    color: var(--color-disabled);
+  }
+}

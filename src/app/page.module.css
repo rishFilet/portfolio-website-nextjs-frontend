@@ -1,28 +1,45 @@
 @layer page {
   .homePage {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 0.7fr auto;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0;
     padding-top: var(--padding-small);
     padding-bottom: var(--padding-small);
   }
 
-  .contentContainer {
+  .heroImageContainer {
     height: 100%;
     width: 100%;
     padding: var(--padding-normal);
   }
-
-  .heroImage {
-    width: 100%;
+  .contentContainer {
     height: 100%;
-    position: relative;
   }
 
   .heroText {
-    padding: 0 var(--padding-normal);
+    display: flex;
+    flex-direction: column;
+    & h1 {
+      font-weight: var(--fw-700);
+      font-size: 4em;
+      padding-top: var(--padding-large);
+    }
+    & h2 {
+      font-family: var(--font-indie-flower);
+      font-weight: var(--fw-700);
+      font-size:1.2em;
+      padding-bottom: 1em;
+      color: var(--color-accent)
+    }
+    & p{
+      font-size: 1em;
+      font-weight: var(--fw-400);
+      line-height: 1.5;
+      text-align: center;
+      padding: var(--padding-small) 0;
+    }
   }
+
 }

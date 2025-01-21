@@ -1,4 +1,27 @@
-.navbar {
+@layer component {
+  .mobileNavbar {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--padding-normal);
+    align-items: center;
+  }
+
+  .hamburgerMenuButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 3.125rem;
+    width: 3.125rem;
+  }
+
+  .hamburgerMenuIcon {
+    color: var(--color-accent);
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* .navbar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   flex-direction: row;
@@ -20,7 +43,7 @@
   }
 }
 
-@media (max-width: 1300px) {
+@media (width > 75rem) {
   .navbar {
     display: flex;
     padding: var(--padding-small);
@@ -58,15 +81,15 @@
   padding-right: var(--padding-normal);
 }
 
+.mobileNavbar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .hamburgerMenu {
-  display: block;
   cursor: pointer;
   height: calc(var(--navbar-height) - 2 * var(--padding-normal));
   padding-right: var(--padding-normal);
 }
 
-.hamburgerMenuIcon {
-  color: var(--color-primary-light);
-  height: 100%;
-  width: 100%;
-}
+ */

@@ -1,0 +1,64 @@
+@layer component {
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: var(--padding-normal);
+    background-color: var(--color-secondary);
+    border-radius: 1rem;
+    gap: var(--gap-normal);
+    max-height: 30rem;
+  }
+
+  .cardImageContainer {
+    height: 10rem;
+    width: 100%;
+    border-radius: 0.7rem;
+  }
+
+  .tagsContainer {
+    display: flex;
+    gap: var(--gap-small);
+    flex-wrap: wrap;
+    width: 100%;
+    height: 1rem;
+  }
+
+  .tag {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    color: var(--color-accent);
+    background-color: #f0f0f0;
+    border-radius: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--color-accent);
+  }
+
+  .textContainer {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    h3 {
+      text-align: left;
+      padding-bottom: 0;
+    }
+    p {
+      text-align: left;
+      height: 6rem;
+      overflow: hidden;
+      padding-top: 0;
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
