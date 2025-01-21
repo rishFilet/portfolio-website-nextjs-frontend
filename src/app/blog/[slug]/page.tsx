@@ -1,6 +1,6 @@
 import { BlogDataType } from '@/lib/api/api.types';
 
-import styles from './BlogPostPage.module.css';
+import styles from './page.module.css';
 
 type BlogPostPageProps = {
   blogData: BlogDataType;
