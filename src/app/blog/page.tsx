@@ -1,38 +1,25 @@
 import Card from '@/components/card/Card';
 import PageContainer from '@/components/pageContainer/PageContainer';
+import { getBlogPosts } from '@/lib/api/api.helpers';
 import { BlogDataType } from '@/lib/api/api.types';
+import { calculateReadingTime } from '@/lib/utils/string.helpers';
 
-const initialBlogData = [
-  {
-    title: 'Blog Title',
-    cardDescription:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores porro explicabo accusantium perspiciatis unde, rem, sit ullam magnam, totam ipsam vitae laborum. Consectetur nihil fugiat inventore non animi dignissimos.',
-    imageSrc: '/vercel.svg',
-    link: '/blog/1',
-    footer: {
-      postedDate: '12/12/2023',
-      readTime: '5 min read',
-    },
-    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    postContent:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores porro explicabo accusantium perspiciatis unde, rem, sit ullam magnam, totam ipsam vitae laborum. Consectetur nihil fugiat inventore non animi dignissimos.',
-  },
-];
+const Blog = async () => {
+  const blogPosts = await getBlogPosts();
 
-const Blog = () => {
   return (
     <PageContainer>
-      {initialBlogData.map((data: BlogDataType) => {
+      {blogPosts.map((data: BlogDataType) => {
         return (
           <Card
-            key={data.footer.postedDate}
+            key={data.createdAt}
             title={data.title}
-            description={data.cardDescription}
-            imageSrc={data.imageSrc}
+            description={data.postSummary}
+            // imageSrc={data.}
             tags={data.tags}
           >
-            <h6>{data.footer.postedDate}</h6>
-            <h6>{data.footer.readTime}</h6>
+            <h6>{data.createdAt}</h6>
+            <h6>{calculateReadingTime([data.postContent])}</h6>
           </Card>
         );
       })}

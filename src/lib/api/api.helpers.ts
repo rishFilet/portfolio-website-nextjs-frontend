@@ -63,6 +63,10 @@ export const getThemeByName = cache(async (themeName: string) => {
   return themes.find((theme) => theme.uniqueName === themeName);
 });
 
+export const getBlogPosts = cache(async () => {
+  return getStrapiData<BlogDataType[]>({ endpoint: API_IDS.blogPosts });
+});
+
 export const getBlogPostsBySlug = cache(async (slug: string) => {
   const posts = await getStrapiData<BlogDataType[]>({ endpoint: API_IDS.blogPosts });
 

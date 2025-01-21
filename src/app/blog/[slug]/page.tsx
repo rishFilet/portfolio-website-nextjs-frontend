@@ -4,12 +4,13 @@ import { BlogDataType } from '@/lib/api/api.types';
 
 import styles from './page.module.css';
 
-export type BlogPostPageProps = {
+export type Params = Promise<{
   slug: string;
-};
+}>;
 
-const BlogPostPage = async ({ params }: { params: BlogPostPageProps }) => {
-  const { slug } = params;
+const BlogPostPage = async ({ params }: { params: Params }) => {
+  console.log(params);
+  const { slug } = await params;
 
   const post = await getBlogPostsBySlug(slug);
 
