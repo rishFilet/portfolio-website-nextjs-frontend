@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    padding: 2rem;
   }
 
   .heroImageContainer {
@@ -13,13 +14,13 @@
   }
   .contentContainer {
     height: 100%;
-    padding: 2rem;
+    padding: 1rem;
   }
 
   .heroText {
     display: flex;
     flex-direction: column;
-    padding-top: 1.2rem;
+    padding-top: 0;
     & h1 {
       font-weight: var(--fw-700);
       font-size: 4.5em;
@@ -45,7 +46,7 @@
     .homePage {
       height: auto;
       grid-template-columns: 1fr 1fr;
-      padding: 5rem;
+      padding: 2rem;
     }
 
     .heroText {
@@ -64,6 +65,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding-left: 4em;
     }
 }
 }
