@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // If this changes, update the media query in Navbar.module.scss and Footer.module.scss
-export const DESKTOP_MIN_WIDTH = 1300;
+export const DESKTOP_MIN_WIDTH = 769;
 
 interface UseWindowWidthProps {
   initialWidth?: number;

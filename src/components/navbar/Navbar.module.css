@@ -1,12 +1,22 @@
 @layer component {
-  .navbar
-  .mobileNavbar {
+  .navbar {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding: var(--padding-normal);
     align-items: center;
     /* position: fixed;
     width: 100%; */
+  }
+
+  .menuItemsContainer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding-right: var(--padding-large);
+    font-size: 1.2rem;
+    font-weight: var(--fw-500)
   }
 
   .hamburgerMenuButton {

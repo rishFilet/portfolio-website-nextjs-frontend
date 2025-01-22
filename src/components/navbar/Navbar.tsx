@@ -32,19 +32,18 @@ const Navbar = (props: NavbarProps) => {
   }, [props, isMobile]);
 
   return (
-    <nav className={styles.navbar}>
+    <nav>
       {!isMobile && (
-        <>
-          <div className={styles.logo}>LOGO</div>
+        <div className={styles.navbar}>
           <ThemeSwitcher />
           <div className={styles.menuItemsContainer}>
             <Link href="/blog">Blog</Link>
             <Link href="/about">About</Link>
           </div>
-        </>
+        </div>
       )}
       {isMobile && (
-        <div className={styles.mobileNavbar}>
+        <div className={styles.navbar}>
           <ThemeSwitcher />
           <button onClick={props.toggleSidebar} className={styles.hamburgerMenuButton}>
             <HamburgerMenuIcon className={styles.hamburgerMenuIcon} />
