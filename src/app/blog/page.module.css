@@ -1,0 +1,15 @@
+@layer page {
+  .cardContainer {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    text-decoration: none;
+    max-width: 60rem;
+  }
+
+  @media screen and (max-width: 48rem) {
+    .cardContainer {
+      grid-template-columns: 1fr;
+      padding: 0 var(--padding-large);
+    }
+  }
+}

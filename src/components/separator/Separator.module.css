@@ -1,0 +1,21 @@
+@layer component {
+    .SeparatorRoot {
+        background-color: var(--color-accent);
+    }
+
+    .SeparatorRoot[data-orientation="horizontal"] {
+        height: 2px;
+        width: 100%;
+    }
+
+    .SeparatorRoot[data-orientation="vertical"] {
+        height: 100%;
+        width: 1px;
+    }
+
+    .Text {
+        color: white;
+        font-size: 15px;
+        line-height: 20px;
+    }
+}

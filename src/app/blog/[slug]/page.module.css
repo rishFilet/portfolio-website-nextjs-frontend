@@ -1,0 +1,54 @@
+@layer page {
+  .blogPostContainer {
+    display: grid;
+    padding: var(--padding-large);
+    max-width: 50rem;
+    height: 100%;
+
+    & h3 {
+      padding-bottom: 0;
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (width < 30rem) {
+    .blogPostContainer {
+      & h3 {
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  .subHeaderInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-large);
+    width: 100%;
+    opacity: 55%;
+  }
+
+  .blogPostContentContainer {
+    padding: 0 var(--padding-large);
+    padding-bottom: var(--padding-large);
+    height: 100%;
+
+
+    & p {
+      text-align: left;
+    }
+  }
+
+  .aspectRatioContainer {
+    aspect-ratio: 16/9;
+    width: 100%;
+    border-radius: 0.7rem;
+    padding-bottom: 1.3rem;
+  }
+
+  .cardImageContainer {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.7rem;
+  }
+}

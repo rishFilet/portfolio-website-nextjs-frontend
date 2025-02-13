@@ -2,21 +2,54 @@
   .navbar {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding: var(--padding-normal);
     align-items: center;
-    /* position: fixed;
-    width: 100%; */
+    padding: var(--padding-normal);
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll;
+    z-index: 1000;
+    background-color: transparent;
+    transition: background-color 0.2s ease-in-out;
+    /* to avoid overlap with the navbar */
+  }
+
+  .desktopNavbar {
+    justify-content: space-between;
+  }
+
+  .mobileNavbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbarColorChange {
+    background-color: var(--color-secondary);
+    transition: background-color 0.5s ease-in-out;
+  }
+
+  .logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: clamp(3.5rem, 7vw, 5rem);
+    margin-left: clamp(0rem, 2vw, 1rem);
   }
 
   .menuItemsContainer {
     display: flex;
-    gap: 2rem;
+    gap: 1.4rem;
     align-items: center;
     justify-content: center;
     padding-right: var(--padding-large);
-    font-size: 1.2rem;
+    font-size: var(--navbar-font-size);
     font-weight: var(--fw-500)
+  }
+
+  .innerLinkContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 0.5rem;
   }
 
   .hamburgerMenuButton {

@@ -1,6 +1,18 @@
 @layer component {
-  .imageContainer {
-    height: 100%;
+  .aspectRatioContainer {
     position: relative;
+    width: 100%;
+    height: 100px;
+  }
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .responsiveImage {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 }

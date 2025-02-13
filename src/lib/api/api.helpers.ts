@@ -33,9 +33,9 @@ export async function apiHandler<T>(request: Request): Promise<Record<string, T>
 
 export async function getStrapiData<T>({
   endpoint,
-  populate = '*',
+  populate = 'populate=*',
 }: GetStrapiDataParams): Promise<T> {
-  const url = `${BASE_API_URL}/api/${endpoint}?populate=${populate}`;
+  const url = `${BASE_API_URL}/api/${endpoint}?${populate}`;
 
   const { data } = await apiHandler<T>(
     new Request(url, {
@@ -64,11 +64,23 @@ export const getThemeByName = cache(async (themeName: string) => {
 });
 
 export const getBlogPosts = cache(async () => {
-  return getStrapiData<BlogDataType[]>({ endpoint: API_IDS.blogPosts });
+  return getStrapiData<BlogDataType[]>({
+    endpoint: API_IDS.blogPosts,
+    populate: 'populate[0]=postImages.mediaFiles&populate[1]=tags',
+  });
 });
 
 export const getBlogPostsBySlug = cache(async (slug: string) => {
-  const posts = await getStrapiData<BlogDataType[]>({ endpoint: API_IDS.blogPosts });
+  const posts = await getStrapiData<BlogDataType[]>({
+    endpoint: API_IDS.blogPosts,
+    populate: 'populate[0]=postImages.mediaFiles&populate[1]=tags',
+  });
 
   return posts.find((post) => post.slug === slug);
+});
+
+export const getLatestBlogPost = cache(async () => {
+  const posts = await getBlogPosts();
+
+  return posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
 });

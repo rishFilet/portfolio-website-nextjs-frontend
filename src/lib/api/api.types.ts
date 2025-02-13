@@ -27,6 +27,7 @@ export type ThemeDataType = {
   fontAwesomeIcon: string;
   fontColorHexCode: string;
   heroImage: MediaType;
+  logo: MediaType;
   primaryColorHexCode: string;
   secondaryColorHexCode: string;
   uniqueName: string;
@@ -42,9 +43,18 @@ export type BlogDataType = {
   createdAt: string;
   likes: number;
   postContent: string;
-  postImages: MediaType[];
+  postImages: {
+    mediaFiles: MediaType[];
+    priority: number;
+  }[];
   postSummary: string;
   slug: string;
-  tags?: string[];
+  tags?: { name: string }[];
   title: string;
+};
+
+export type SocialLinkDataType = {
+  displayName: string;
+  iconShortcode: string;
+  link: string;
 };

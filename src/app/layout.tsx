@@ -4,7 +4,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
-import { Indie_Flower, Inter, Oswald, Qwigley, Roboto_Condensed } from 'next/font/google';
+import { Indie_Flower, Inter, Oswald, Qwigley, Roboto } from 'next/font/google';
 import Script from 'next/script';
 
 import '@/styles/reset.css'; // Import reset styles first
@@ -21,16 +21,18 @@ library.add(fas, far, fab);
 import MetadataConstants from './metadata';
 
 
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
 });
 
-const robotoCondensed = Roboto_Condensed({
+const roboto = Roboto({
   subsets: ['latin'],
-  variable: '--font-roboto-condensed',
+  variable: '--font-roboto',
   display: 'swap',
+  weight: ['100', '300', '400', '500', '700', '900'],
 });
 
 const oswald = Oswald({
@@ -68,6 +70,16 @@ export const initialThemeData: ThemeDataType = {
   secondaryColorHexCode: '#ffffff',
   fontColorHexCode: '#000000',
   accentColorHexCode: '#ffffff',
+  logo: {
+    alternativeText: '',
+    formats: {
+      small: initialMediaFormat as MediaFormatType,
+      medium: initialMediaFormat as MediaFormatType,
+      large: initialMediaFormat as MediaFormatType, 
+      thumbnail: initialMediaFormat as MediaFormatType,
+    },
+    ...initialMediaFormat, 
+  },
   heroImage: {
     alternativeText: '',
     formats: {
@@ -93,7 +105,7 @@ const RootLayout = async ({
     <>
       <html
         lang="en"
-        className={`${robotoCondensed.variable} ${oswald.variable} ${indieFlower.variable} ${qwigley.variable}`}
+        className={`${roboto.variable} ${oswald.variable} ${indieFlower.variable} ${qwigley.variable}`}
       >
         <body className={inter.className}>
           <Script src="https://kit.fontawesome.com/7e82cbbb97.js" strategy="afterInteractive" />

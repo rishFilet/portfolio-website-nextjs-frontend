@@ -1,7 +1,9 @@
 @layer component {
   .themeSwitchContainer {
     display: flex;
-    gap: 0.7rem;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
   }
 
   .themeSwitchButton {
@@ -16,24 +18,22 @@
 
   .themeIcon {
     align-content: center;
-    font-size: 2rem;
-    color: var(--color-accent);
+    font-size: 1.3rem;
+    color: var(--color-secondary);
     height: 100%;
     width: 100%;
+    text-align: center;
   }
 
-  .activeThemeIcon {
-    background-color: var(--color-accent);
+  .themeIcon.active {
     color: var(--color-secondary);
-    padding: 0.2em;
-    border-radius: 0.2em;
-    transition: all 0.2s ease-in;
   }
 
   .isLoadingAndActive {
     background-color: var(--color-disabled);
     color: var(--color-secondary);
   }
+
   .isLoadingAndInactive {
     color: var(--color-disabled);
   }

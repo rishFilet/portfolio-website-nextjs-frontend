@@ -2,11 +2,13 @@ import Card from '@/components/card/Card';
 import PageContainer from '@/components/pageContainer/PageContainer';
 import { getBlogPosts } from '@/lib/api/api.helpers';
 import { BlogDataType } from '@/lib/api/api.types';
+import { convertDateToHumanReadable } from '@/lib/utils/date.helpers';
 import { calculateReadingTime } from '@/lib/utils/string.helpers';
+
+import styles from './page.module.css';
 
 const Blog = async () => {
   const blogPosts = await getBlogPosts();
-  console.log(blogPosts);
   return (
     <PageContainer>
       {blogPosts.map((data: BlogDataType) => {
@@ -15,11 +17,16 @@ const Blog = async () => {
             key={data.createdAt}
             title={data.title}
             description={data.postSummary}
-            // imageSrc={data.}
-            tags={data.tags}
+            image={
+              data.postImages.find((image) => image.priority === 1)?.mediaFiles[0].formats?.medium
+            }
+            link={`/blog/${data.slug}`}
+            tags={data.tags?.map((tag) => tag.name)}
+            classNames={{ cardContainer: styles.cardContainer }}
           >
-            <h6>{data.createdAt}</h6>
-            <h6>{calculateReadingTime([data.postContent])}</h6>
+            <h6>{convertDateToHumanReadable(data.createdAt)}</h6>
+            <p dangerouslySetInnerHTML={{ __html: '&#x00B7;' }} />
+            <h6>{calculateReadingTime([data.postContent])} min read</h6>
           </Card>
         );
       })}

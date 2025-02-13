@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import Navbar from '@/components/navbar/Navbar';
+import Sidebar from '@/components/sidebar/Sidebar';
 
 const Navigation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,12 +23,11 @@ const Navigation = () => {
         toggleSidebar={toggleSidebar}
         setSideBarVisibility={handleShowingSidebarBasedOnScreenSize}
       />
-      {/* <Sidebar
+      <Sidebar
         sidebarVisibility={sidebarVisibility}
-        navbarData={navbarData}
         toggleSidebar={toggleSidebar}
         isSidebarOpen={isSidebarOpen}
-      /> */}
+      />
     </>
   );
 };

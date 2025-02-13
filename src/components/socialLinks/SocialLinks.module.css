@@ -1,0 +1,19 @@
+@layer component {
+  .socialLinksContainer {
+    display: flex;
+    gap: 0.7rem;
+  }
+
+  .socialLink {
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 4px var(--color-accent));
+    }
+
+    &:active {
+      transform: translate(2px, 2px);
+    }
+  }
+}

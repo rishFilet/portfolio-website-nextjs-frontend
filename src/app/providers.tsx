@@ -2,6 +2,7 @@
 // but it is there in case other providers are needed
 'use client';
 
+import { ScrollProvider } from '@/components/scrollProvider/ScrollProvider';
 import { ThemeProvider } from '@/components/themeProvider/ThemeProvider';
 import { ThemeDataType } from '@/lib/api/api.types';
 
@@ -16,7 +17,9 @@ export function Providers({
 }) {
   return (
     <ThemeProvider initialTheme={theme} initialThemes={allThemes}>
-      {children}
+      <ScrollProvider>
+        {children}
+      </ScrollProvider>
     </ThemeProvider>
   );
 }

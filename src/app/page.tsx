@@ -1,12 +1,13 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
-import ImageComponent from '@/components/image/Image';
+import HeroImage from '@/components/heroImage/HeroImage';
 import PageContainer from '@/components/pageContainer/PageContainer';
+import SocialLinks from '@/components/socialLinks/SocialLinks';
 import { API_IDS } from '@/lib/api/api.constants';
-import { getStrapiData } from '@/lib/api/api.helpers';
+import { getLatestBlogPost, getStrapiData } from '@/lib/api/api.helpers';
 import type { LandingPageDataType, ThemeDataType } from '@/lib/api/api.types';
-import { getCurrentTheme } from '@/lib/utils/theme.server';
 
 import { shartollLight } from './fonts';
 import styles from './page.module.css';
@@ -20,18 +21,14 @@ export default async function Home() {
     endpoint: API_IDS.landingPage,
   });
 
-  const { heroImage } = await getCurrentTheme();
+  const post = await getLatestBlogPost();
 
   const { description, header, subHeader } = landingPageData;
 
   return (
     <PageContainer className={styles.homePage}>
-      <div className={styles.heroImageContainer}>
-        <ImageComponent
-          alt={heroImage.alternativeText}
-          src={heroImage.formats.large.url}
-          style={{ borderRadius: '1rem', boxShadow: '0 0.1rem 0.3rem rgba(0, 0, 0, 0.5)' }}
-        />
+      <div className={styles.gridContainer}>
+        <HeroImage className={styles.heroImageContainer} />
       </div>
       <div className={styles.contentContainer}>
         <div className={styles.heroText}>
@@ -40,11 +37,14 @@ export default async function Home() {
           <ReactMarkdown disallowedElements={[]} unwrapDisallowed skipHtml remarkPlugins={[]}>
             {description}
           </ReactMarkdown>
-          {/* <div className={styles.ctaButton}>
-            <button>Check out my latest blog post</button>
-            <button>Check out my latest project</button>
-          </div> */}
-          <div className={styles.socialLinks}></div>
+          <div className={styles.latestLinksContainer}>
+            <Link className={styles.latestLink} href={`/blog/${post.slug}`}>
+              <span className={styles.emoji}>📝</span>Latest Blog Post
+            </Link>
+          </div>
+          <div className={styles.socialLinks}>
+            <SocialLinks className={styles.socialLinks} />
+          </div>
         </div>
       </div>
     </PageContainer>

@@ -12,6 +12,10 @@
 
     --font-family-price: var(--font-oswald);
 
+    --navbar-font-size: 1.3rem;
+    --navbar-height: calc(clamp(3.5rem, 7vw, 5rem) + 2 * var(--padding-normal));
+    ;
+
     --fw-300: 300;
     --fw-400: 400;
     --fw-500: 500;
@@ -20,7 +24,8 @@
     --color-font: #303030;
     --color-primary: #fff;
     --color-secondary: #303030;
-    --color-accent: #2bb1a5; /* Example primary color */
+    --color-accent: #2bb1a5;
+    /* Example primary color */
     --color-disabled: #9f9f9f;
 
     --padding-small: 0.625rem;
@@ -93,11 +98,12 @@
   }
 
   h3 {
-    font-size: 1.25rem;
-    font-weight: var(--fw-500);
+    font-size: 1.7rem;
+    font-weight: var(--fw-700);
     line-height: 1.4;
     text-align: center;
     padding: 0.625rem 0;
+    font-family: var(--font-roboto);
   }
 
   h6 {
@@ -118,8 +124,8 @@
 
   /* Section Padding */
   section {
-    padding: 5rem 0; /* Adjust to 40px for mobile */
-    max-width: 75rem;
+    padding: 5rem 0;
+    /* Adjust to 40px for mobile */
     margin: 0 auto;
   }
 
@@ -148,7 +154,7 @@
     }
 
     h3 {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       padding: 0.5rem 0;
     }
 
