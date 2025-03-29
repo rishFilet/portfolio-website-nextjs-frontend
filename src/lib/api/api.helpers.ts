@@ -1,5 +1,7 @@
 import { cache } from 'react';
 
+import { convertCommaSeparatedStringToArray } from '@/lib/utils/string.helpers';
+
 import { addHashToColors } from '../utils/theme';
 
 import {
@@ -10,7 +12,12 @@ import {
   successStatusCodes,
 } from './api.constants';
 
-import type { BlogDataType, GetStrapiDataParams, ThemeDataType } from './api.types';
+import type {
+  BlogDataType,
+  GetStrapiDataParams,
+  LandingPageDataType,
+  ThemeDataType,
+} from './api.types';
 
 export async function apiHandler<T>(request: Request): Promise<Record<string, T>> {
   try {
@@ -51,6 +58,20 @@ export async function getStrapiData<T>({
     resolve(data);
   });
 }
+
+export const getLandingPageData = cache(async () => {
+  const { description, header, commaSeparatedSubHeadersString } =
+    await getStrapiData<LandingPageDataType>({ endpoint: API_IDS.landingPage });
+
+  const commaSeparatedSubHeadersList = convertCommaSeparatedStringToArray(
+    commaSeparatedSubHeadersString,
+  );
+  return {
+    description,
+    header,
+    commaSeparatedSubHeadersList,
+  };
+});
 
 export const getThemes = cache(async () => {
   const themes = await getStrapiData<ThemeDataType[]>({ endpoint: API_IDS.themeData });

@@ -34,6 +34,7 @@ export type ThemeDataType = {
 };
 
 export type LandingPageDataType = {
+  commaSeparatedSubHeadersString: string;
   description: string;
   header: string;
   subHeader: string;
@@ -44,8 +45,9 @@ export type BlogDataType = {
   likes: number;
   postContent: string;
   postImages: {
+    isMain: boolean,
     mediaFiles: MediaType[];
-    priority: number;
+    order: number;
   }[];
   postSummary: string;
   slug: string;

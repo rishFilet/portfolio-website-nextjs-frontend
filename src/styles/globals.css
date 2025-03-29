@@ -27,6 +27,7 @@
     --color-accent: #2bb1a5;
     /* Example primary color */
     --color-disabled: #9f9f9f;
+    --color-codeblock: #DCD7C9;
 
     --padding-small: 0.625rem;
     --padding-normal: 1rem;
@@ -48,7 +49,7 @@
 
   /* Global font settings */
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     color: var(--color-font);
@@ -87,10 +88,11 @@
     letter-spacing: -0.02em;
     text-align: center;
     padding: 1.25rem 0;
+    font-family: var(--font-raleway);
   }
 
   h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.7rem, 3vw, 2rem);
     font-weight: var(--fw-500);
     line-height: 1.4;
     text-align: center;
@@ -104,6 +106,12 @@
     text-align: center;
     padding: 0.625rem 0;
     font-family: var(--font-roboto);
+  }
+
+  h4 {
+    font-size: 1.4rem;
+    font-weight: var(--fw-700);
+    padding: 0.625rem 0;
   }
 
   h6 {

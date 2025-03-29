@@ -54,7 +54,10 @@ const Navbar = (props: NavbarProps) => {
             isScrolled && styles.navbarColorChange,
           )}
         >
-          <Link className={styles.logoContainer} href="/">
+          <Link
+            className={clsx(styles.logoContainer, isScrolled && styles.logoContainerChange)}
+            href="/"
+          >
             <ImageComponent
               alt={logo.name}
               src={logo.formats.small.url}

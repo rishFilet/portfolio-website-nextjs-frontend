@@ -19,3 +19,7 @@ export function calculateReadingTime(textArray: string[], readingPace: number = 
   // Return the reading time rounded to 2 decimal places
   return Math.max(Math.ceil(readingTime), 1);
 }
+
+export function convertCommaSeparatedStringToArray(commaSeparatedString: string): string[] {
+  return commaSeparatedString.includes(',') ? commaSeparatedString.split(',').map((item) => item.trim()) : [commaSeparatedString];
+}

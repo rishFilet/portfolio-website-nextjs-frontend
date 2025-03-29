@@ -4,7 +4,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
-import { Indie_Flower, Inter, Oswald, Qwigley, Roboto } from 'next/font/google';
+import { Indie_Flower, Inter, Oswald, Qwigley, Roboto, Bitter, Raleway } from 'next/font/google';
 import Script from 'next/script';
 
 import '@/styles/reset.css'; // Import reset styles first
@@ -27,7 +27,16 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
-
+const bitter = Bitter({
+  subsets: ['latin'],
+  variable: '--font-bitter',
+  display: 'swap',
+});
+const raleway = Raleway({
+  subsets: ['latin'],
+  variable: '--font-raleway',
+  display: 'swap',
+});
 const roboto = Roboto({
   subsets: ['latin'],
   variable: '--font-roboto',
@@ -105,9 +114,9 @@ const RootLayout = async ({
     <>
       <html
         lang="en"
-        className={`${roboto.variable} ${oswald.variable} ${indieFlower.variable} ${qwigley.variable}`}
+        className={`${roboto.variable} ${oswald.variable} ${indieFlower.variable} ${qwigley.variable} ${bitter.variable} ${raleway.variable} ${inter.variable}`}
       >
-        <body className={inter.className}>
+        <body>
           <Script src="https://kit.fontawesome.com/7e82cbbb97.js" strategy="afterInteractive" />
           <Providers theme={initialTheme} allThemes={themeData}>
             <div className={clsx(styles.siteContainer, initialTheme.uniqueName === 'none' && styles.loading)}>

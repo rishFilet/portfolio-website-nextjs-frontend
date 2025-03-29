@@ -21,9 +21,21 @@ const HeroImage = (props: HeroImageProps) => {
     <div className={clsx(styles.heroImageContainer, className)}>
       <ImageComponent
         alt={heroImage.alternativeText}
-        src={heroImage.formats.large.url}
-        height={heroImage.formats.large.height}
-        width={heroImage.formats.large.width}
+        src={
+          heroImage.formats.large?.url ||
+          heroImage.formats.medium?.url ||
+          heroImage.formats.small.url
+        }
+        height={
+          heroImage.formats.large?.height ||
+          heroImage.formats.medium?.height ||
+          heroImage.formats.small?.height
+        }
+        width={
+          heroImage.formats.large?.width ||
+          heroImage.formats.medium?.width ||
+          heroImage.formats.small?.width
+        }
         style={{ borderRadius: '50%', boxShadow: '0 0.1rem 0.3rem rgba(0, 0, 0, 0.5)' }}
       />
     </div>

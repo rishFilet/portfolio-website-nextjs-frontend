@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { ThemeDataType } from '@/lib/api/api.types';
+import { getComplementaryColor } from '@/lib/utils/colors.helpers';
 
 interface ThemeContextType {
   currentTheme: ThemeDataType;
@@ -29,7 +30,11 @@ export function ThemeProvider({
     root.style.setProperty('--color-primary', currentTheme.primaryColorHexCode);
     root.style.setProperty('--color-secondary', currentTheme.secondaryColorHexCode);
     root.style.setProperty('--color-accent', currentTheme.accentColorHexCode);
-    root.style.setProperty('--color-font', currentTheme.fontColorHexCode);
+    root.style.setProperty('--color-font', getComplementaryColor(currentTheme.primaryColorHexCode));
+    root.style.setProperty(
+      '--color-codeblock',
+      getComplementaryColor(currentTheme.fontColorHexCode),
+    );
 
     // You can also add dark mode variables if needed
     // root.style.setProperty('--color-primary-dark', currentTheme.colors.primaryDark);
