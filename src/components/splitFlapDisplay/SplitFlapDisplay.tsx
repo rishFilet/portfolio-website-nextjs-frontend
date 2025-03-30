@@ -23,6 +23,7 @@ type SplitFlapDisplayComponentProps = {
 
 const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
   const {
+    // eslint-disable-next-line prettier/prettier
     value = "Don't Panic!",
     switchStringDelayMs = 15000,
     background = '#000',
