@@ -13,7 +13,9 @@ export function ThemeSwitcher() {
   const { themes, currentTheme, setCurrentTheme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
-  const [switchChecked, setSwitchChecked] = useState(currentTheme?.uniqueName === 'light');
+  const [switchChecked, setSwitchChecked] = useState(
+    currentTheme?.uniqueName === 'light',
+  );
 
   const darkTheme = themes.find((theme) => theme.uniqueName === 'dark');
   const lightTheme = themes.find((theme) => theme.uniqueName === 'light');
@@ -51,8 +53,16 @@ export function ThemeSwitcher() {
           height={35}
           handleDiameter={32}
           width={75}
-          checkedIcon={<i className={clsx(styles.themeIcon, lightTheme?.fontAwesomeIcon)}></i>}
-          uncheckedIcon={<i className={clsx(styles.themeIcon, darkTheme?.fontAwesomeIcon)}></i>}
+          checkedIcon={
+            <i
+              className={clsx(styles.themeIcon, lightTheme?.fontAwesomeIcon)}
+            ></i>
+          }
+          uncheckedIcon={
+            <i
+              className={clsx(styles.themeIcon, darkTheme?.fontAwesomeIcon)}
+            ></i>
+          }
           boxShadow="0 1px 5px rgba(0, 0, 0, 0.6)"
         />
       </label>

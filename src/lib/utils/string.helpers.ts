@@ -6,7 +6,10 @@
  * @returns {number} - Estimated reading time in minutes (rounded to 2 decimal places).
  */
 
-export function calculateReadingTime(textArray: string[], readingPace: number = 200): number {
+export function calculateReadingTime(
+  textArray: string[],
+  readingPace: number = 200,
+): number {
   // Count the total number of words in the array
   const totalWords = textArray.reduce((wordCount, text) => {
     // Split each string by spaces and count the words
@@ -20,6 +23,10 @@ export function calculateReadingTime(textArray: string[], readingPace: number = 
   return Math.max(Math.ceil(readingTime), 1);
 }
 
-export function convertCommaSeparatedStringToArray(commaSeparatedString: string): string[] {
-  return commaSeparatedString.includes(',') ? commaSeparatedString.split(',').map((item) => item.trim()) : [commaSeparatedString];
+export function convertCommaSeparatedStringToArray(
+  commaSeparatedString: string,
+): string[] {
+  return commaSeparatedString.includes(',')
+    ? commaSeparatedString.split(',').map((item) => item.trim())
+    : [commaSeparatedString];
 }

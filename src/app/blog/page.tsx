@@ -17,7 +17,10 @@ const Blog = async () => {
             key={data.createdAt}
             title={data.title}
             description={data.postSummary}
-            image={data.postImages.find((image) => image.isMain)?.mediaFiles[0].formats?.medium}
+            image={
+              data.postImages.find((image) => image.isMain)?.mediaFiles[0]
+                .formats?.medium
+            }
             link={`/blog/${data.slug}`}
             tags={data.tags?.map((tag) => tag.name)}
             classNames={{ cardContainer: styles.cardContainer }}

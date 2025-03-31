@@ -3,11 +3,11 @@ import Image from 'next/image';
 import styles from './Image.module.css';
 
 type ImageComponentProps = {
-  alt: string;
-  height?: number;
-  src: string;
-  style?: React.CSSProperties;
-  width?: number;
+  alt: string,
+  height?: number,
+  src: string,
+  style?: React.CSSProperties,
+  width?: number,
 };
 
 const ImageComponent = (props: ImageComponentProps) => {

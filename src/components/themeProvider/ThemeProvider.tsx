@@ -18,9 +18,9 @@ export function ThemeProvider({
   initialTheme,
   initialThemes,
 }: {
-  children: React.ReactNode;
-  initialTheme: ThemeDataType;
-  initialThemes: ThemeDataType[];
+  children: React.ReactNode,
+  initialTheme: ThemeDataType,
+  initialThemes: ThemeDataType[],
 }) {
   const [currentTheme, setCurrentTheme] = useState<ThemeDataType>(initialTheme);
   useEffect(() => {
@@ -28,9 +28,15 @@ export function ThemeProvider({
 
     // Update all theme-related CSS variables
     root.style.setProperty('--color-primary', currentTheme.primaryColorHexCode);
-    root.style.setProperty('--color-secondary', currentTheme.secondaryColorHexCode);
+    root.style.setProperty(
+      '--color-secondary',
+      currentTheme.secondaryColorHexCode,
+    );
     root.style.setProperty('--color-accent', currentTheme.accentColorHexCode);
-    root.style.setProperty('--color-font', getComplementaryColor(currentTheme.primaryColorHexCode));
+    root.style.setProperty(
+      '--color-font',
+      getComplementaryColor(currentTheme.primaryColorHexCode),
+    );
     root.style.setProperty(
       '--color-codeblock',
       getComplementaryColor(currentTheme.fontColorHexCode),
@@ -40,7 +46,9 @@ export function ThemeProvider({
     // root.style.setProperty('--color-primary-dark', currentTheme.colors.primaryDark);
   }, [currentTheme]);
   return (
-    <ThemeContext.Provider value={{ themes: initialThemes, currentTheme, setCurrentTheme }}>
+    <ThemeContext.Provider
+      value={{ themes: initialThemes, currentTheme, setCurrentTheme }}
+    >
       {children}
     </ThemeContext.Provider>
   );

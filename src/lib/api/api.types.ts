@@ -1,8 +1,8 @@
 import { API_IDS } from './api.constants';
 
 export type GetStrapiDataParams = {
-  endpoint: (typeof API_IDS)[keyof typeof API_IDS];
-  populate?: string;
+  endpoint: (typeof API_IDS)[keyof typeof API_IDS],
+  populate?: string,
 };
 
 export type MediaFormatType = {
@@ -13,14 +13,14 @@ export type MediaFormatType = {
 };
 
 export type MediaType = {
-    alternativeText: string;
-    formats: {
-      large: MediaFormatType;
-      medium: MediaFormatType;
-      small: MediaFormatType;
-      thumbnail: MediaFormatType;
-    };
-  } & MediaFormatType;
+  alternativeText: string;
+  formats: {
+    large: MediaFormatType;
+    medium: MediaFormatType;
+    small: MediaFormatType;
+    thumbnail: MediaFormatType;
+  };
+} & MediaFormatType;
 
 export type ThemeDataType = {
   accentColorHexCode: string;
@@ -45,7 +45,7 @@ export type BlogDataType = {
   likes: number;
   postContent: string;
   postImages: {
-    isMain: boolean,
+    isMain: boolean;
     mediaFiles: MediaType[];
     order: number;
   }[];

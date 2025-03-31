@@ -1,4 +1,3 @@
-
 import clsx from 'clsx';
 
 import { API_IDS } from '@/lib/api/api.constants';
@@ -8,11 +7,10 @@ import type { SocialLinkDataType } from '@/lib/api/api.types';
 import styles from './SocialLinks.module.css';
 
 export type SocialLinksProps = {
-  className?: string;
+  className?: string,
 };
 
 const SocialLinks = async (props: SocialLinksProps) => {
-
   const { className } = props;
 
   const socialLinks = await getStrapiData<SocialLinkDataType[]>({

@@ -15,14 +15,15 @@ import { calculateReadingTime } from '@/lib/utils/string.helpers';
 import styles from './page.module.css';
 
 export type Params = Promise<{
-  slug: string;
+  slug: string,
 }>;
 
 const BlogPostPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
   const post = await getBlogPostsBySlug(slug);
-  const image = post?.postImages.find((image) => image.order === 1)?.mediaFiles[0].formats?.medium;
+  const image = post?.postImages.find((image) => image.order === 1)
+    ?.mediaFiles[0].formats?.medium;
 
   return (
     <PageContainer className={styles.blogPostContainer}>
@@ -53,14 +54,18 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
               </div>
             </div>
           )}
-          <Separator orientation="horizontal" style={{ marginBottom: '1.5rem' }} />
+          <Separator
+            orientation="horizontal"
+            style={{ marginBottom: '1.5rem' }}
+          />
           <div className={styles.blogPostContentContainer}>
             <ReactMarkdown
               disallowedElements={[]}
               unwrapDisallowed
               remarkPlugins={[remarkGfm]}
               components={{
-                code({ node, inline, className, children, ...props }) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                code({ node, inline, className, children, ...props }: any) {
                   const match = (className || '').match(/language-(\w+)/);
                   return !inline && match ? (
                     <SyntaxHighlighter
@@ -72,7 +77,6 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
                       PreTag="div"
                       showLineNumbers
                       codeTagProps={{ className: styles.codeTag }}
-                      {...props}
                     >
                       {String(children).replace(/\n$/, '')}
                     </SyntaxHighlighter>
@@ -86,7 +90,10 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
             >
               {post.postContent}
             </ReactMarkdown>{' '}
-            <Separator orientation="horizontal" style={{ marginBottom: '1.5rem' }} />
+            <Separator
+              orientation="horizontal"
+              style={{ marginBottom: '1.5rem' }}
+            />
           </div>
         </>
       )}

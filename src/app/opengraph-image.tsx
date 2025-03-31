@@ -3,8 +3,8 @@ import { ImageResponse } from 'next/og';
 export const runtime = 'edge';
 
 export default async function Image() {
-  const logoSrc = await fetch(new URL('./icon.png', import.meta.url)).then((res) =>
-    res.arrayBuffer(),
+  const logoSrc = await fetch(new URL('./icon.png', import.meta.url)).then(
+    (res) => res.arrayBuffer(),
   );
 
   return new ImageResponse(

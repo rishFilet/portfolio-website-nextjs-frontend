@@ -11,7 +11,7 @@ import type { ThemeDataType } from '@/lib/api/api.types';
 import styles from './page.module.css';
 
 export type HomePageProps = {
-  heroImage: ThemeDataType['heroImage'];
+  heroImage: ThemeDataType['heroImage'],
 };
 
 export default async function Home() {
@@ -42,7 +42,12 @@ export default async function Home() {
               background="var(--color-accent)"
             />
           </div>
-          <ReactMarkdown disallowedElements={[]} unwrapDisallowed skipHtml remarkPlugins={[]}>
+          <ReactMarkdown
+            disallowedElements={[]}
+            unwrapDisallowed
+            skipHtml
+            remarkPlugins={[]}
+          >
             {description}
           </ReactMarkdown>
           <div className={styles.latestLinksContainer}>

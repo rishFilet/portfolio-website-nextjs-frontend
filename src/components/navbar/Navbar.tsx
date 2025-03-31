@@ -18,8 +18,8 @@ import styles from './Navbar.module.css';
 import type { NavbarLink } from './Navbar.types';
 
 type NavbarProps = {
-  setSideBarVisibility: (visibility: boolean) => void;
-  toggleSidebar: () => void;
+  setSideBarVisibility: (visibility: boolean) => void,
+  toggleSidebar: () => void,
 };
 
 const initialData: NavbarProps = {
@@ -55,7 +55,10 @@ const Navbar = (props: NavbarProps) => {
           )}
         >
           <Link
-            className={clsx(styles.logoContainer, isScrolled && styles.logoContainerChange)}
+            className={clsx(
+              styles.logoContainer,
+              isScrolled && styles.logoContainerChange,
+            )}
             href="/"
           >
             <ImageComponent
@@ -98,7 +101,10 @@ const Navbar = (props: NavbarProps) => {
             />
           </Link>
           <ThemeSwitcher />
-          <button onClick={props.toggleSidebar} className={styles.hamburgerMenuButton}>
+          <button
+            onClick={props.toggleSidebar}
+            className={styles.hamburgerMenuButton}
+          >
             <HamburgerMenuIcon className={styles.hamburgerMenuIcon} />
           </button>
         </div>

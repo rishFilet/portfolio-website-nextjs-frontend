@@ -6,24 +6,23 @@ import * as CharacterSetConstants from 'react-split-flap-display/constants';
 
 import styles from './SplitFlapDisplay.module.css';
 type SplitFlapDisplayComponentProps = {
-  background?: string;
-  borderColor?: string;
-  borderWidth?: string;
-  characterSet?: string[];
-  characterWidth?: string;
-  fontSize?: string;
-  listOfValues?: string[];
-  padDirection?: 'left' | 'right';
-  step?: number;
-  switchStringDelayMs?: number;
-  textColor?: string;
-  value?: string;
-  withSound?: boolean;
+  background?: string,
+  borderColor?: string,
+  borderWidth?: string,
+  characterSet?: string[],
+  characterWidth?: string,
+  fontSize?: string,
+  listOfValues?: string[],
+  padDirection?: 'left' | 'right',
+  step?: number,
+  switchStringDelayMs?: number,
+  textColor?: string,
+  value?: string,
+  withSound?: boolean,
 };
 
 const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
   const {
-    // eslint-disable-next-line prettier/prettier
     value = "Don't Panic!",
     switchStringDelayMs = 15000,
     background = '#000',
@@ -43,7 +42,9 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
     withSound,
   } = props;
 
-  const [currentValue, setCurrentValue] = useState(listOfValues ? listOfValues[0] : value);
+  const [currentValue, setCurrentValue] = useState(
+    listOfValues ? listOfValues[0] : value,
+  );
 
   /* Function to create a timer with a certain set of seconds */
   const [seconds, setSeconds] = useState(switchStringDelayMs / 1000);
@@ -86,7 +87,9 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
       <div className={styles.splitFlapDisplay}>
         <SplitFlapDisplay
           characterSet={
-            CharacterSetConstants.PUNCTUATION.some((char) => value.includes(char))
+            CharacterSetConstants.PUNCTUATION.some((char) =>
+              value.includes(char),
+            )
               ? characterSet
               : CharacterSetConstants.PUNCTUATION
           }

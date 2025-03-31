@@ -19,7 +19,9 @@ import type {
   ThemeDataType,
 } from './api.types';
 
-export async function apiHandler<T>(request: Request): Promise<Record<string, T>> {
+export async function apiHandler<T>(
+  request: Request,
+): Promise<Record<string, T>> {
   try {
     const response = await fetch(request, {
       next: {
@@ -74,7 +76,9 @@ export const getLandingPageData = cache(async () => {
 });
 
 export const getThemes = cache(async () => {
-  const themes = await getStrapiData<ThemeDataType[]>({ endpoint: API_IDS.themeData });
+  const themes = await getStrapiData<ThemeDataType[]>({
+    endpoint: API_IDS.themeData,
+  });
   return themes.map(addHashToColors);
 });
 
@@ -103,5 +107,7 @@ export const getBlogPostsBySlug = cache(async (slug: string) => {
 export const getLatestBlogPost = cache(async () => {
   const posts = await getBlogPosts();
 
-  return posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
+  return posts.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  )[0];
 });

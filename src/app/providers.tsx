@@ -17,9 +17,7 @@ export function Providers({
 }) {
   return (
     <ThemeProvider initialTheme={theme} initialThemes={allThemes}>
-      <ScrollProvider>
-        {children}
-      </ScrollProvider>
+      <ScrollProvider>{children}</ScrollProvider>
     </ThemeProvider>
   );
 }

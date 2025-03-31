@@ -6,21 +6,29 @@ import { useScroll } from '../scrollProvider/ScrollProvider';
 
 import styles from './PageContainer.module.css';
 
-function pageContainer({ children, className }: { children: React.ReactNode; className?: string }) {
+function pageContainer({
+  children,
+  className,
+}: {
+  children: React.ReactNode,
+  className?: string,
+}) {
   const { setIsScrolled } = useScroll();
 
   interface ScrollEvent extends React.UIEvent<HTMLElement> {
     target: HTMLElement &
       EventTarget & {
-        clientHeight: number;
-        scrollHeight: number;
-        scrollTop: number;
+        clientHeight: number,
+        scrollHeight: number,
+        scrollTop: number,
       };
   }
 
   const handleScroll = (e: ScrollEvent) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
-    const position = Math.ceil((scrollTop / (scrollHeight - clientHeight)) * 100);
+    const position = Math.ceil(
+      (scrollTop / (scrollHeight - clientHeight)) * 100,
+    );
     setIsScrolled(position > 0);
   };
 

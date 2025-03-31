@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const ScrollContext = createContext({ isScrolled: false, setIsScrolled: (value: boolean) => {} });
+const ScrollContext = createContext({
+  isScrolled: false,
+  setIsScrolled: (value: boolean) => {},
+});
 
 export const ScrollProvider = ({ children }: { children: React.ReactNode }) => {
   const [isScrolled, setIsScrolled] = useState(false);

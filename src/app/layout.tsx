@@ -1,10 +1,17 @@
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
-import { Indie_Flower, Inter, Oswald, Qwigley, Roboto, Bitter, Raleway } from 'next/font/google';
+import {
+  Indie_Flower,
+  Inter,
+  Oswald,
+  Qwigley,
+  Roboto,
+  Bitter,
+  Raleway,
+} from 'next/font/google';
 import Script from 'next/script';
 
 import '@/styles/reset.css'; // Import reset styles first
@@ -19,8 +26,6 @@ import { getCurrentTheme } from '@/lib/utils/theme.server';
 library.add(fas, far, fab);
 
 import MetadataConstants from './metadata';
-
-
 
 const inter = Inter({
   subsets: ['latin'],
@@ -84,31 +89,30 @@ export const initialThemeData: ThemeDataType = {
     formats: {
       small: initialMediaFormat as MediaFormatType,
       medium: initialMediaFormat as MediaFormatType,
-      large: initialMediaFormat as MediaFormatType, 
+      large: initialMediaFormat as MediaFormatType,
       thumbnail: initialMediaFormat as MediaFormatType,
     },
-    ...initialMediaFormat, 
+    ...initialMediaFormat,
   },
   heroImage: {
     alternativeText: '',
     formats: {
       small: initialMediaFormat as MediaFormatType,
       medium: initialMediaFormat as MediaFormatType,
-      large: initialMediaFormat as MediaFormatType, 
+      large: initialMediaFormat as MediaFormatType,
       thumbnail: initialMediaFormat as MediaFormatType,
     },
-    ...initialMediaFormat, 
+    ...initialMediaFormat,
   },
 };
 
 const RootLayout = async ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode,
 }>) => {
   const themeData = await getThemes();
-  const initialTheme =
-    await getCurrentTheme();
+  const initialTheme = await getCurrentTheme();
 
   return (
     <>
@@ -117,11 +121,26 @@ const RootLayout = async ({
         className={`${roboto.variable} ${oswald.variable} ${indieFlower.variable} ${qwigley.variable} ${bitter.variable} ${raleway.variable} ${inter.variable}`}
       >
         <body>
-          <Script src="https://kit.fontawesome.com/7e82cbbb97.js" strategy="afterInteractive" />
+          <Script
+            src="https://kit.fontawesome.com/7e82cbbb97.js"
+            strategy="afterInteractive"
+          />
           <Providers theme={initialTheme} allThemes={themeData}>
-            <div className={clsx(styles.siteContainer, initialTheme.uniqueName === 'none' && styles.loading)}>
+            <div
+              className={clsx(
+                styles.siteContainer,
+                initialTheme.uniqueName === 'none' && styles.loading,
+              )}
+            >
               <Navigation />
-              <main className={clsx(styles.main, initialTheme.uniqueName === 'none' && styles.loading)}>{children}</main>
+              <main
+                className={clsx(
+                  styles.main,
+                  initialTheme.uniqueName === 'none' && styles.loading,
+                )}
+              >
+                {children}
+              </main>
             </div>
           </Providers>
         </body>

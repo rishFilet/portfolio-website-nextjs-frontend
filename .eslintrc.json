@@ -10,10 +10,13 @@
   "parser": "@typescript-eslint/parser",
   "rules": {
     "semi": ["error", "always"],
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
     "no-unused-vars": "off",
     "no-console": "warn",
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_" }
+    ],
     "@typescript-eslint/no-unused-expressions": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",
     "react/jsx-uses-react": "off",
@@ -56,6 +59,19 @@
       }
     ],
     "typescript-sort-keys/interface": "warn",
-    "typescript-sort-keys/string-enum": "warn"
+    "typescript-sort-keys/string-enum": "warn",
+
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "parser": "flow",
+        "semi": true,
+        "trailingComma": "all",
+        "printWidth": 100,
+        "bracketSpacing": true,
+        "rangeEnd": 100
+      }
+    ]
   }
 }

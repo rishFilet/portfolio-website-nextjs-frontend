@@ -38,6 +38,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      complex-types:
+        specifier: link:react-markdown/lib/complex-types
+        version: link:react-markdown/lib/complex-types
       icons:
         specifier: link:@awesome.me/kit-KIT_CODE/icons
         version: link:@awesome.me/kit-KIT_CODE/icons

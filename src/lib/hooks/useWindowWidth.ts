@@ -7,7 +7,9 @@ interface UseWindowWidthProps {
   initialWidth?: number;
 }
 
-export const useWindowWidth = ({ initialWidth = 0 }: UseWindowWidthProps = {}) => {
+export const useWindowWidth = ({
+  initialWidth = 0,
+}: UseWindowWidthProps = {}) => {
   const [width, setWidth] = useState(initialWidth);
   const [isMobile, setIsMobile] = useState(width < DESKTOP_MIN_WIDTH);
 

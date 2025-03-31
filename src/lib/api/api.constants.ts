@@ -15,7 +15,7 @@ export const API_IDS = {
   landingPage: 'landing-page',
   themeData: 'themes',
   blogPosts: 'blog-posts',
-  socialLinks: 'social-links'
+  socialLinks: 'social-links',
 } as const;
 
 export const DEFAULT_THEME = 'light';

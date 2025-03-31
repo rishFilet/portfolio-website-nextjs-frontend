@@ -35,7 +35,7 @@ export const getComplementaryColor = (hex: string) => {
   const cb = 255 - b;
 
   // Convert complementary RGB values back to hex
-  const complementaryHex = `#${(cr.toString(16).padStart(2, '0'))}${(cg.toString(16).padStart(2, '0'))}${(cb.toString(16).padStart(2, '0'))}`;
+  const complementaryHex = `#${cr.toString(16).padStart(2, '0')}${cg.toString(16).padStart(2, '0')}${cb.toString(16).padStart(2, '0')}`;
 
   return complementaryHex;
 };

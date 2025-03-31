@@ -6,19 +6,19 @@ import ImageComponent from '../image/Image';
 import styles from './Card.module.css';
 
 type CardProps = {
-  children?: React.ReactNode;
+  children?: React.ReactNode,
   classNames?: {
-    cardContainer: string;
-  };
-  description: string;
+    cardContainer: string,
+  },
+  description: string,
   image?: {
-    height: number;
-    url: string;
-    width: number;
-  };
-  link?: string;
-  tags?: string[];
-  title: string;
+    height: number,
+    url: string,
+    width: number,
+  },
+  link?: string,
+  tags?: string[],
+  title: string,
 };
 
 const Card = (props: CardProps) => {
@@ -32,7 +32,10 @@ const Card = (props: CardProps) => {
     classNames,
   } = props;
   return (
-    <Link className={clsx(styles.cardContainer, classNames?.cardContainer)} href={`${link}`}>
+    <Link
+      className={clsx(styles.cardContainer, classNames?.cardContainer)}
+      href={`${link}`}
+    >
       {image && (
         <div className={styles.aspectRatioContainer}>
           <div className={styles.cardImageContainer}>

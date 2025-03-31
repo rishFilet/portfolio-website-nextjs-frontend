@@ -1,8 +1,8 @@
 export type NavbarLink = {
-  className?: string;
-  icon: string;
-  name: string;
-  path: string;
+  className?: string,
+  icon: string,
+  name: string,
+  path: string,
 };
 
 export type NavbarData = {

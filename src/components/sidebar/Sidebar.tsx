@@ -11,9 +11,9 @@ import { NavbarLink } from '../navbar/Navbar.types';
 import styles from './Sidebar.module.css';
 
 type SidebarProps = {
-  isSidebarOpen?: boolean;
-  sidebarVisibility: boolean;
-  toggleSidebar: () => void;
+  isSidebarOpen?: boolean,
+  sidebarVisibility: boolean,
+  toggleSidebar: () => void,
 };
 
 const Sidebar = (props: SidebarProps) => {

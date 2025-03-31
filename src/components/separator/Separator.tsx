@@ -4,10 +4,10 @@ import clsx from 'clsx';
 import styles from './Separator.module.css';
 
 export type SeparatorProps = {
-  className?: string;
-  decorative?: boolean;
-  orientation?: 'horizontal' | 'vertical';
-  style?: React.CSSProperties;
+  className?: string,
+  decorative?: boolean,
+  orientation?: 'horizontal' | 'vertical',
+  style?: React.CSSProperties,
 };
 
 const Separator = (props: SeparatorProps) => {

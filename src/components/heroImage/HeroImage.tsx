@@ -9,7 +9,7 @@ import { useTheme } from '../themeProvider/ThemeProvider';
 import styles from './HeroImage.module.css';
 
 type HeroImageProps = {
-  className?: string;
+  className?: string,
 };
 
 const HeroImage = (props: HeroImageProps) => {
@@ -36,7 +36,10 @@ const HeroImage = (props: HeroImageProps) => {
           heroImage.formats.medium?.width ||
           heroImage.formats.small?.width
         }
-        style={{ borderRadius: '50%', boxShadow: '0 0.1rem 0.3rem rgba(0, 0, 0, 0.5)' }}
+        style={{
+          borderRadius: '50%',
+          boxShadow: '0 0.1rem 0.3rem rgba(0, 0, 0, 0.5)',
+        }}
       />
     </div>
   );

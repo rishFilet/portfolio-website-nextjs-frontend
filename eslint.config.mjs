@@ -38,7 +38,7 @@ export default [
 
     rules: {
       semi: ['error', 'always'],
-      quotes: ['error', 'single'],
+      quotes: ['error', 'single', { avoidEscape: true }],
       'no-unused-vars': 'off',
       'no-console': 'warn',
 
@@ -98,6 +98,18 @@ export default [
 
       'typescript-sort-keys/interface': 'warn',
       'typescript-sort-keys/string-enum': 'warn',
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          parser: 'flow',
+          semi: true,
+          trailingComma: 'all',
+          printWidth: 80,
+          bracketSpacing: true,
+          rangeEnd: 80,
+        },
+      ],
     },
   },
 ];

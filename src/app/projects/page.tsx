@@ -4,12 +4,12 @@ import PageContainer from '@/components/pageContainer/PageContainer';
 import styles from './page.module.css';
 
 type ProjectsProps = {
-  cardDescription: string;
-  createdAt: string;
-  link: string;
-  tags?: string[];
-  technologies?: string[];
-  title: string;
+  cardDescription: string,
+  createdAt: string,
+  link: string,
+  tags?: string[],
+  technologies?: string[],
+  title: string,
 };
 
 const initialProjectsData = [

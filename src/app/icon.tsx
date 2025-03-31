@@ -11,7 +11,10 @@ export const contentType = 'image/png';
 
 // Image generation
 export default function Icon() {
-  const absoluteUrl = new URL('/icon.png', MetadataConstants.metadataBase || '');
+  const absoluteUrl = new URL(
+    '/icon.png',
+    MetadataConstants.metadataBase || '',
+  );
 
   return new ImageResponse(
     (
@@ -27,7 +30,12 @@ export default function Icon() {
           color: 'white',
         }}
       >
-        <img src={absoluteUrl.toString()} alt="icon" width={size.width} height={size.height} />
+        <img
+          src={absoluteUrl.toString()}
+          alt="icon"
+          width={size.width}
+          height={size.height}
+        />
       </div>
     ),
     {
