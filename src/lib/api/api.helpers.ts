@@ -22,21 +22,16 @@ import type {
 export async function apiHandler<T>(
   request: Request,
 ): Promise<Record<string, T>> {
-  try {
-    const response = await fetch(request, {
-      next: {
-        revalidate: 5, //TODO: Update this when launched live
-      },
-    });
+  const response = await fetch(request, {
+    next: {
+      revalidate: 5, //TODO: Update this when launched live
+    },
+  });
 
-    if (response.status === successStatusCodes[request.method as HttpMethod]) {
-      return response.json();
-    } else {
-      throw new Error('Something went wrong on API server!');
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
+  if (response.status === successStatusCodes[request.method as HttpMethod]) {
+    return response.json();
+  } else {
+    throw new Error('Something went wrong on API server!');
   }
 }
 
@@ -46,13 +41,19 @@ export async function getStrapiData<T>({
 }: GetStrapiDataParams): Promise<T> {
   const url = `${BASE_API_URL}/api/${endpoint}?${populate}`;
 
+  // Only include Authorization header if token is available
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+
+  if (STRAPI_API_TOKEN) {
+    headers.Authorization = `Bearer ${STRAPI_API_TOKEN}`;
+  }
+
   const { data } = await apiHandler<T>(
     new Request(url, {
       method: HttpMethod.GET,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${STRAPI_API_TOKEN}`,
-      },
+      headers,
     }),
   );
 

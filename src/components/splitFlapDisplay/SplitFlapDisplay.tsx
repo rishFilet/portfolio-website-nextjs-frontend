@@ -43,7 +43,7 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
   } = props;
 
   const [currentValue, setCurrentValue] = useState(
-    listOfValues ? listOfValues[0] : value,
+    listOfValues && listOfValues.length > 0 ? listOfValues[0] : value,
   );
 
   /* Function to create a timer with a certain set of seconds */
@@ -67,16 +67,10 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
     if (listOfValues && listOfValues.length > 0) {
       const nextIndex = (currentIndex + 1) % listOfValues.length;
       setCurrentIndex(nextIndex);
-      setCurrentValue(listOfValues[nextIndex]);
+      setCurrentValue(listOfValues[nextIndex] || value);
     } else {
       setCurrentValue(value);
     }
-  };
-
-  const getMinLength = (listOfValues: string[]) => {
-    return listOfValues.reduce((minLength, value) => {
-      return value.length > minLength ? value.length : minLength;
-    }, 0);
   };
 
   return (
@@ -87,14 +81,15 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
       <div className={styles.splitFlapDisplay}>
         <SplitFlapDisplay
           characterSet={
+            value &&
             CharacterSetConstants.PUNCTUATION.some((char) =>
               value.includes(char),
             )
               ? characterSet
               : CharacterSetConstants.PUNCTUATION
           }
-          minLength={currentValue.length}
-          value={currentValue.toUpperCase()}
+          minLength={currentValue?.length || 0}
+          value={currentValue?.toUpperCase() || ''}
           background={background}
           borderColor={borderColor}
           fontSize={fontSize}

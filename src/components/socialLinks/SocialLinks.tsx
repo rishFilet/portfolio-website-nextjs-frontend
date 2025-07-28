@@ -13,9 +13,32 @@ export type SocialLinksProps = {
 const SocialLinks = async (props: SocialLinksProps) => {
   const { className } = props;
 
-  const socialLinks = await getStrapiData<SocialLinkDataType[]>({
-    endpoint: API_IDS.socialLinks,
-  });
+  let socialLinks: SocialLinkDataType[] = [];
+
+  try {
+    socialLinks = await getStrapiData<SocialLinkDataType[]>({
+      endpoint: API_IDS.socialLinks,
+    });
+  } catch {
+    // Fallback social links
+    socialLinks = [
+      {
+        displayName: 'GitHub',
+        link: 'https://github.com',
+        iconShortcode: 'fab fa-github',
+      },
+      {
+        displayName: 'LinkedIn',
+        link: 'https://linkedin.com',
+        iconShortcode: 'fab fa-linkedin',
+      },
+      {
+        displayName: 'Twitter',
+        link: 'https://twitter.com',
+        iconShortcode: 'fab fa-twitter',
+      },
+    ];
+  }
 
   return (
     <div className={clsx(styles.socialLinksContainer, className)}>

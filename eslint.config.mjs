@@ -36,6 +36,12 @@ export default [
       parser: tsParser,
     },
 
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+
     rules: {
       semi: ['error', 'always'],
       quotes: ['error', 'single', { avoidEscape: true }],

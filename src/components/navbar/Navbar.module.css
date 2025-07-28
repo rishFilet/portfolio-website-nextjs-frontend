@@ -48,7 +48,7 @@
     justify-content: center;
     padding-right: var(--padding-large);
     font-size: var(--navbar-font-size);
-    font-weight: var(--fw-500)
+    font-weight: var(--fw-500);
   }
 
   .innerLinkContainer {

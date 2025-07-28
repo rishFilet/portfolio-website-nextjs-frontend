@@ -4,18 +4,17 @@
     --line-height-small: 1.2;
     --line-height-normal: 1.6;
 
-    --font-family-content: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-family-monospace: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-      'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono',
-      'Droid Sans Mono', 'Courier New', monospace;
+    --font-family-content: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-family-monospace: ui-monospace, Menlo, Monaco, "Cascadia Mono",
+      "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+      "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New",
+      monospace;
     --font-family-heading: var(--font-family-content);
 
     --font-family-price: var(--font-oswald);
 
     --navbar-font-size: 1.3rem;
     --navbar-height: calc(clamp(3.5rem, 7vw, 5rem) + 2 * var(--padding-normal));
-    ;
-
     --fw-300: 300;
     --fw-400: 400;
     --fw-500: 500;
@@ -27,7 +26,7 @@
     --color-accent: #2bb1a5;
     /* Example primary color */
     --color-disabled: #9f9f9f;
-    --color-codeblock: #DCD7C9;
+    --color-codeblock: #dcd7c9;
 
     --padding-small: 0.625rem;
     --padding-normal: 1rem;
@@ -49,7 +48,7 @@
 
   /* Global font settings */
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     color: var(--color-font);

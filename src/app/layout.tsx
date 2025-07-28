@@ -22,7 +22,8 @@ import { Providers } from '@/app/providers';
 import Navigation from '@/components/navigation/Navigation'; // Import component styles
 import { getThemes } from '@/lib/api/api.helpers';
 import type { MediaFormatType, ThemeDataType } from '@/lib/api/api.types';
-import { getCurrentTheme } from '@/lib/utils/theme.server';
+import { getStaticThemes } from '@/lib/utils/theme.server';
+
 library.add(fas, far, fab);
 
 import MetadataConstants from './metadata';
@@ -78,12 +79,12 @@ export const initialMediaFormat: MediaFormatType = {
   width: 0,
 };
 export const initialThemeData: ThemeDataType = {
-  uniqueName: 'none',
-  fontAwesomeIcon: 'sun',
-  primaryColorHexCode: '#000000',
-  secondaryColorHexCode: '#ffffff',
+  uniqueName: 'light',
+  fontAwesomeIcon: 'fas fa-sun',
+  primaryColorHexCode: '#ffffff',
+  secondaryColorHexCode: '#000000',
   fontColorHexCode: '#000000',
-  accentColorHexCode: '#ffffff',
+  accentColorHexCode: '#2bb1a5',
   logo: {
     alternativeText: '',
     formats: {
@@ -111,8 +112,18 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode,
 }>) => {
-  const themeData = await getThemes();
-  const initialTheme = await getCurrentTheme();
+  // Add error handling for theme data fetching
+  let themeData;
+  let initialTheme;
+
+  try {
+    themeData = await getThemes();
+    initialTheme = await getStaticThemes().then((themes) => themes[0]);
+  } catch {
+    // Use fallback theme data
+    themeData = [initialThemeData];
+    initialTheme = initialThemeData;
+  }
 
   return (
     <>

@@ -1,5 +1,5 @@
 @layer component {
-    .heroImageContainer {
-        display: flex;
-    }
+  .heroImageContainer {
+    display: flex;
+  }
 }

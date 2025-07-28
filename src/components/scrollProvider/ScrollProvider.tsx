@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 const ScrollContext = createContext({
   isScrolled: false,
-  setIsScrolled: (value: boolean) => {},
+  setIsScrolled: (_value: boolean) => {},
 });
 
 export const ScrollProvider = ({ children }: { children: React.ReactNode }) => {

@@ -11,7 +11,7 @@ import styles from './ThemeSwitcher.module.css';
 
 export function ThemeSwitcher() {
   const { themes, currentTheme, setCurrentTheme } = useTheme();
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
 
   const [switchChecked, setSwitchChecked] = useState(
     currentTheme?.uniqueName === 'light',
@@ -35,8 +35,8 @@ export function ThemeSwitcher() {
     try {
       setSwitchChecked(checked);
       switchTheme(checked ? lightTheme : darkTheme);
-    } catch (error) {
-      console.error('Failed to change theme', error);
+    } catch {
+      // Handle theme change error silently
     } finally {
       setIsLoading(false);
     }

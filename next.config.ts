@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '1337',
+        port: '1338',
         pathname: '/**',
       },
       {
@@ -46,6 +46,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: process.env.SUPABASE_HOSTNAME || 'localhost',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'supabase.rishikhan.dev',
         pathname: '/**',
       },
     ],

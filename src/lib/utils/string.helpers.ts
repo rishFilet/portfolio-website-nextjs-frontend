@@ -24,8 +24,13 @@ export function calculateReadingTime(
 }
 
 export function convertCommaSeparatedStringToArray(
-  commaSeparatedString: string,
+  commaSeparatedString: string | null | undefined,
 ): string[] {
+  // Handle null/undefined values
+  if (!commaSeparatedString) {
+    return [];
+  }
+
   return commaSeparatedString.includes(',')
     ? commaSeparatedString.split(',').map((item) => item.trim())
     : [commaSeparatedString];

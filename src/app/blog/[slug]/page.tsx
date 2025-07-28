@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkGfm from 'remark-gfm';
@@ -64,8 +65,14 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
               unwrapDisallowed
               remarkPlugins={[remarkGfm]}
               components={{
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                code({ node, inline, className, children, ...props }: any) {
+                 
+                code({
+                  node: _node,
+                  inline,
+                  className,
+                  children,
+                  ...props
+                }: any) {
                   const match = (className || '').match(/language-(\w+)/);
                   return !inline && match ? (
                     <SyntaxHighlighter

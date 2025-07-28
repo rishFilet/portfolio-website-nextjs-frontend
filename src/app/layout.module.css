@@ -1,5 +1,4 @@
 @layer layout {
-
   /* .loading {
     display: none;  
     transition: all 0.2s fade-in;
@@ -9,7 +8,6 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-
   }
 
   .main {

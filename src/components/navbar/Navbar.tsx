@@ -3,7 +3,7 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useWindowWidth } from '@/lib/hooks/useWindowWidth';
 
@@ -22,25 +22,18 @@ type NavbarProps = {
   toggleSidebar: () => void,
 };
 
-const initialData: NavbarProps = {
-  toggleSidebar: () => {},
-  setSideBarVisibility: () => {},
-};
-
 const Navbar = (props: NavbarProps) => {
-  const [propsData, setPropsData] = useState<NavbarProps>(initialData);
-  const { width, isMobile } = useWindowWidth();
+  const { isMobile } = useWindowWidth();
   const { isScrolled } = useScroll();
 
-  const { themes, currentTheme, setCurrentTheme } = useTheme();
+  const { currentTheme } = useTheme();
 
   const logo = currentTheme.logo;
 
-  // Update state when props change
+  // Update sidebar visibility when mobile state changes
   useEffect(() => {
-    if (props && Object.entries(props).length > 0) {
-      setPropsData(props);
-      props.setSideBarVisibility && props.setSideBarVisibility(isMobile);
+    if (props.setSideBarVisibility) {
+      props.setSideBarVisibility(isMobile);
     }
   }, [props, isMobile]);
 
@@ -61,12 +54,14 @@ const Navbar = (props: NavbarProps) => {
             )}
             href="/"
           >
-            <ImageComponent
-              alt={logo.name}
-              src={logo.formats.small.url}
-              height={logo.formats.small.height}
-              width={logo.formats.small.width}
-            />
+            {logo && (
+              <ImageComponent
+                alt={logo.name || 'Logo'}
+                src={logo.formats?.small?.url || ''}
+                height={logo.formats?.small?.height || 40}
+                width={logo.formats?.small?.width || 40}
+              />
+            )}
           </Link>
           <div className={styles.menuItemsContainer}>
             {allMenuLinks.map((link: NavbarLink, idx) => (
@@ -93,12 +88,14 @@ const Navbar = (props: NavbarProps) => {
           )}
         >
           <Link className={styles.logoContainer} href="/">
-            <ImageComponent
-              alt={logo.name}
-              src={logo.formats.small.url}
-              height={logo.formats.small.height}
-              width={logo.formats.small.width}
-            />
+            {logo && (
+              <ImageComponent
+                alt={logo.name || 'Logo'}
+                src={logo.formats?.small?.url || ''}
+                height={logo.formats?.small?.height || 40}
+                width={logo.formats?.small?.width || 40}
+              />
+            )}
           </Link>
           <ThemeSwitcher />
           <button

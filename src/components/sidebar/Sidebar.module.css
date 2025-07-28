@@ -1,62 +1,62 @@
 @layer component {
-    .sidebarVisible {
-        display: flex;
-    }
+  .sidebarVisible {
+    display: flex;
+  }
 
-    .sidebarHidden {
-        display: none;
-    }
+  .sidebarHidden {
+    display: none;
+  }
 
-    .sidebarContainer {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        margin-top: var(--navbar-height);
-        position: fixed;
-        top: 0;
-        z-index: 50;
-        background-color: var(--color-secondary);
-        height: calc(100vh - var(--navbar-height));
-        transition: right 0.3s ease;
-        /* Smooth transition */
-        right: -100%;
-        /* Initially hidden off-screen */
-    }
+  .sidebarContainer {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: var(--navbar-height);
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    background-color: var(--color-secondary);
+    height: calc(100vh - var(--navbar-height));
+    transition: right 0.3s ease;
+    /* Smooth transition */
+    right: -100%;
+    /* Initially hidden off-screen */
+  }
 
-    .childSidebarContainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        width: 100%;
-        gap: 3rem;
-        margin-top: 3rem;
-    }
+  .childSidebarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
 
-    .sidebarOpen {
-        right: 0;
-        /* Slide in from the left */
-    }
+  .sidebarOpen {
+    right: 0;
+    /* Slide in from the left */
+  }
 
-    .menuItemsContainer {
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-large);
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        flex-grow: 1;
-        height: 100%;
-        font-weight: var(--fw-700);
-        font-size: 2rem;
-        background-color: var(--color-secondary);
-        color: var(--color-font);
-    }
+  .menuItemsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-large);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+    height: 100%;
+    font-weight: var(--fw-700);
+    font-size: 2rem;
+    background-color: var(--color-secondary);
+    color: var(--color-font);
+  }
 
-    .innerLinkContainer {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        gap: 0.5rem;
-    }
+  .innerLinkContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 0.5rem;
+  }
 }

@@ -15,9 +15,36 @@ export type HomePageProps = {
 };
 
 export default async function Home() {
-  const landingPageData = await getLandingPageData();
+  // Add error handling for API calls
+  let landingPageData;
+  let post;
 
-  const post = await getLatestBlogPost();
+  try {
+    landingPageData = await getLandingPageData();
+  } catch {
+    // Fallback data
+    landingPageData = {
+      description: 'Creative Engineer & Full Stack Developer',
+      header: 'Rishi Khan',
+      commaSeparatedSubHeadersList: [
+        'Full Stack Developer',
+        'UI/UX Designer',
+        'Problem Solver',
+      ],
+    };
+  }
+
+  try {
+    post = await getLatestBlogPost();
+  } catch {
+    // Fallback blog post
+    post = {
+      slug: 'sample-post',
+      title: 'Sample Blog Post',
+      content: 'This is a sample blog post content.',
+      createdAt: new Date().toISOString(),
+    };
+  }
 
   const { description, header, commaSeparatedSubHeadersList } = landingPageData;
 
