@@ -24,7 +24,7 @@ type SplitFlapDisplayComponentProps = {
 const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
   const {
     value = "Don't Panic!",
-    switchStringDelayMs = 15000,
+    switchStringDelayMs = 3000,
     background = '#000',
     borderColor,
     borderWidth = '1px',
