@@ -19,18 +19,21 @@ import type {
   ThemeDataType,
 } from './api.types';
 
-export async function apiHandler<T>(
-  request: Request,
-): Promise<Record<string, T>> {
-  const response = await fetch(request, {
-    next: {
-      revalidate: 5, //TODO: Update this when launched live
-    },
-  });
+export async function apiHandler<T>(request: Request): Promise<Record<string, T>> {
+  try {
+    const response = await fetch(request, {
+      next: {
+        revalidate: 5, //TODO: Update this when launched live
+      },
+    });
 
-  if (response.status === successStatusCodes[request.method as HttpMethod]) {
-    return response.json();
-  } else {
+    if (response.status === successStatusCodes[request.method as HttpMethod]) {
+      return response.json();
+    } else {
+      throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error('API request failed:', error);
     throw new Error('Something went wrong on API server!');
   }
 }
@@ -108,7 +111,5 @@ export const getBlogPostsBySlug = cache(async (slug: string) => {
 export const getLatestBlogPost = cache(async () => {
   const posts = await getBlogPosts();
 
-  return posts.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  )[0];
+  return posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
 });

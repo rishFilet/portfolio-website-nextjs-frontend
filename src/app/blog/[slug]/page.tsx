@@ -110,12 +110,21 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
 
 export default BlogPostPage;
 
-export async function generateStaticParams() {
-  const posts = await getStrapiData<BlogDataType[]>({
-    endpoint: API_IDS.blogPosts,
-  });
+// Force dynamic rendering to prevent build failures
+export const dynamic = 'force-dynamic';
 
-  return posts.map((post: BlogDataType) => ({
-    slug: post.slug,
-  }));
+export async function generateStaticParams() {
+  try {
+    const posts = await getStrapiData<BlogDataType[]>({
+      endpoint: API_IDS.blogPosts,
+    });
+
+    return posts.map((post: BlogDataType) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.warn('Failed to fetch blog posts for static generation:', error);
+    // Return empty array to prevent build failure
+    return [];
+  }
 }
