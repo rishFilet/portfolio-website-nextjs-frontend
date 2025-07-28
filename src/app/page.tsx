@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
@@ -38,12 +39,7 @@ export default async function Home() {
     post = await getLatestBlogPost();
   } catch {
     // Fallback blog post
-    post = {
-      slug: 'sample-post',
-      title: 'Sample Blog Post',
-      content: 'This is a sample blog post content.',
-      createdAt: new Date().toISOString(),
-    };
+    post = null;
   }
 
   const { description, header, commaSeparatedSubHeadersList } = landingPageData;
@@ -77,11 +73,13 @@ export default async function Home() {
           >
             {description}
           </ReactMarkdown>
-          <div className={styles.latestLinksContainer}>
-            <Link className={styles.latestLink} href={`/blog/${post.slug}`}>
-              <span className={styles.emoji}>📝</span>Latest Blog Post
-            </Link>
-          </div>
+          {post && (
+            <div className={styles.latestLinksContainer}>
+              <Link className={styles.latestLink} href={`/blog/${post.slug}`}>
+                <span className={styles.emoji}>📝</span>Latest Blog Post
+              </Link>
+            </div>
+          )}
           <div className={styles.socialLinks}>
             <SocialLinks className={styles.socialLinks} />
           </div>
@@ -90,3 +88,6 @@ export default async function Home() {
     </PageContainer>
   );
 }
+
+// Force dynamic rendering to prevent build failures
+export const dynamic = 'force-dynamic';

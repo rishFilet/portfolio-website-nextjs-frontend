@@ -22,88 +22,101 @@ export type Params = Promise<{
 const BlogPostPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
-  const post = await getBlogPostsBySlug(slug);
+  let post;
+  try {
+    post = await getBlogPostsBySlug(slug);
+  } catch (error) {
+    post = null;
+  }
+
+  if (!post) {
+    return (
+      <PageContainer className={styles.blogPostContainer}>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <h3>Post not found</h3>
+          <p>The blog post you&apos;re looking for doesn&apos;t exist or is not available.</p>
+        </div>
+      </PageContainer>
+    );
+  }
+
   const image = post?.postImages.find((image) => image.order === 1)
     ?.mediaFiles[0].formats?.medium;
 
   return (
     <PageContainer className={styles.blogPostContainer}>
-      <h3>{post ? post.title : 'Post not found'}</h3>
-      {post && (
-        <>
-          <div className={styles.blogMetaDataContainer}>
-            <HeroImage className={styles.heroImageContainer} />
-            <div className={styles.subHeaderInfo}>
-              <h5>Rishi Khan</h5>
-              <div className={styles.subHeaderInfoDetails}>
-                <h6>{convertDateToHumanReadable(post.createdAt)}</h6>
-                <p dangerouslySetInnerHTML={{ __html: '&#x00B7;' }} />
-                <h6>{calculateReadingTime([post.postContent])} min read</h6>
-              </div>
-            </div>
+      <h3>{post.title}</h3>
+      <div className={styles.blogMetaDataContainer}>
+        <HeroImage className={styles.heroImageContainer} />
+        <div className={styles.subHeaderInfo}>
+          <h5>Rishi Khan</h5>
+          <div className={styles.subHeaderInfoDetails}>
+            <h6>{convertDateToHumanReadable(post.createdAt)}</h6>
+            <p dangerouslySetInnerHTML={{ __html: '&#x00B7;' }} />
+            <h6>{calculateReadingTime([post.postContent])} min read</h6>
           </div>
-          {image && (
-            <div className={styles.aspectRatioContainer}>
-              <div className={styles.cardImageContainer}>
-                <ImageComponent
-                  src={image.url}
-                  alt={image.name}
-                  height={image.height}
-                  width={image.width}
-                  style={{ borderRadius: '0.5rem' }}
-                />
-              </div>
-            </div>
-          )}
-          <Separator
-            orientation="horizontal"
-            style={{ marginBottom: '1.5rem' }}
-          />
-          <div className={styles.blogPostContentContainer}>
-            <ReactMarkdown
-              disallowedElements={[]}
-              unwrapDisallowed
-              remarkPlugins={[remarkGfm]}
-              components={{
-                 
-                code({
-                  node: _node,
-                  inline,
-                  className,
-                  children,
-                  ...props
-                }: any) {
-                  const match = (className || '').match(/language-(\w+)/);
-                  return !inline && match ? (
-                    <SyntaxHighlighter
-                      customStyle={{
-                        backgroundColor: 'var(--color-codeblock)',
-                        borderRadius: '0.5rem',
-                      }}
-                      language={match[1]}
-                      PreTag="div"
-                      showLineNumbers
-                      codeTagProps={{ className: styles.codeTag }}
-                    >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className={styles.inlineCodeTag} {...props}>
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {post.postContent}
-            </ReactMarkdown>{' '}
-            <Separator
-              orientation="horizontal"
-              style={{ marginBottom: '1.5rem' }}
+        </div>
+      </div>
+      {image && (
+        <div className={styles.aspectRatioContainer}>
+          <div className={styles.cardImageContainer}>
+            <ImageComponent
+              src={image.url}
+              alt={image.name}
+              height={image.height}
+              width={image.width}
+              style={{ borderRadius: '0.5rem' }}
             />
           </div>
-        </>
+        </div>
       )}
+      <Separator
+        orientation="horizontal"
+        style={{ marginBottom: '1.5rem' }}
+      />
+      <div className={styles.blogPostContentContainer}>
+        <ReactMarkdown
+          disallowedElements={[]}
+          unwrapDisallowed
+          remarkPlugins={[remarkGfm]}
+          components={{
+             
+            code({
+              node: _node,
+              inline,
+              className,
+              children,
+              ...props
+            }: any) {
+              const match = (className || '').match(/language-(\w+)/);
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  customStyle={{
+                    backgroundColor: 'var(--color-codeblock)',
+                    borderRadius: '0.5rem',
+                  }}
+                  language={match[1]}
+                  PreTag="div"
+                  showLineNumbers
+                  codeTagProps={{ className: styles.codeTag }}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code className={styles.inlineCodeTag} {...props}>
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {post.postContent}
+        </ReactMarkdown>{' '}
+        <Separator
+          orientation="horizontal"
+          style={{ marginBottom: '1.5rem' }}
+        />
+      </div>
     </PageContainer>
   );
 };
@@ -117,13 +130,13 @@ export async function generateStaticParams() {
   try {
     const posts = await getStrapiData<BlogDataType[]>({
       endpoint: API_IDS.blogPosts,
+      populate: 'filters[publishedAt][$notNull]=true',
     });
 
     return posts.map((post: BlogDataType) => ({
       slug: post.slug,
     }));
   } catch (error) {
-    console.warn('Failed to fetch blog posts for static generation:', error);
     // Return empty array to prevent build failure
     return [];
   }

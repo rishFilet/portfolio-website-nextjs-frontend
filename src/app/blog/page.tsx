@@ -8,13 +8,32 @@ import { calculateReadingTime } from '@/lib/utils/string.helpers';
 import styles from './page.module.css';
 
 const Blog = async () => {
-  const blogPosts = await getBlogPosts();
+  let blogPosts: BlogDataType[] = [];
+
+  try {
+    blogPosts = await getBlogPosts();
+  } catch (error) {
+    // Return empty array to prevent build failure
+    blogPosts = [];
+  }
+
+  if (blogPosts.length === 0) {
+    return (
+      <PageContainer>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <h2>Blog Posts</h2>
+          <p>No blog posts available at the moment.</p>
+        </div>
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       {blogPosts.map((data: BlogDataType) => {
         return (
           <Card
-            key={data.createdAt}
+            key={`${data.slug}-${data.createdAt}`}
             title={data.title}
             description={data.postSummary}
             image={
@@ -36,3 +55,6 @@ const Blog = async () => {
 };
 
 export default Blog;
+
+// Force dynamic rendering to prevent build failures
+export const dynamic = 'force-dynamic';

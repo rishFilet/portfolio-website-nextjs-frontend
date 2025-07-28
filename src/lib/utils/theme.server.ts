@@ -21,7 +21,10 @@ export async function getCurrentTheme() {
     const cookieStore = cookies();
     const selectedTheme = (await cookieStore).get('selected-theme');
 
-    return themes.find((theme) => theme.uniqueName === selectedTheme?.value) || themes[0];
+    return (
+      themes.find((theme) => theme.uniqueName === selectedTheme?.value) ||
+      themes[0]
+    );
   } catch {
     return initialThemeData;
   }

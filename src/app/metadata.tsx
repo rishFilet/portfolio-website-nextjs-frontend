@@ -3,13 +3,13 @@ import type { Metadata } from 'next';
 const MetadataConstants: Metadata = {
   title: 'Rishi Khan Creative Engineer',
   description:
-    'Welcome to Break Time Muay Thai. We are a small Muay Thai Gym that focuses on Wellness, Small Group & Private Training.',
+    'Creative Engineer & Full Stack Developer. Building innovative digital experiences with modern web technologies.',
   openGraph: {
-    title: 'Break Time Muay Thai',
+    title: 'Rishi Khan Creative Engineer',
     description:
-      'Welcome to Break Time Muay Thai. We are a small Muay Thai Gym that focuses on Wellness, Small Group & Private Training.',
-    url: 'https://breaktimemuaythai.com',
-    siteName: 'Break Time Muay Thai',
+      'Creative Engineer & Full Stack Developer. Building innovative digital experiences with modern web technologies.',
+    url: 'https://rishikhan.dev',
+    siteName: 'Rishi Khan Portfolio',
     locale: 'en_US',
     type: 'website',
   },
