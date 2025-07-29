@@ -1,0 +1,102 @@
+@layer page {
+    .headerContainer {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 var(--padding-large);
+        display: flex;
+        justify-content: center;
+    }
+
+    .projectsHeader {
+        text-align: center;
+        margin-bottom: 4rem;
+        max-width: 60rem;
+    }
+
+    .projectsHeader h1 {
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    .projectsHeader p {
+        font-weight: var(--fw-400);
+        line-height: 1.5;
+        text-align: center;
+        padding: var(--padding-small) 0;
+        color: var(--color-font);
+        opacity: 0.8;
+        font-size: 1.2rem;
+    }
+
+    .tagFilterContainer {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 var(--padding-large);
+    }
+
+    .projectsGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 400px));
+        gap: 2.5rem;
+        max-width: 1400px;
+        width: 100%;
+        padding: var(--padding-large) var(--padding-large);
+        justify-content: start;
+        align-items: start;
+    }
+
+    .projectCard {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 480px;
+        max-height: 720px;
+        max-width: 400px;
+        width: 100%;
+        overflow: hidden;
+        align-self: start;
+    }
+
+    @media (max-width: 768px) {
+        .projectsGrid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: var(--padding-large) var(--padding-normal);
+        }
+
+        .headerContainer {
+            padding: 0 var(--padding-normal);
+        }
+
+        .projectsHeader {
+            margin-bottom: 3rem;
+            padding: 0 var(--padding-normal);
+        }
+
+        .projectsHeader h1 {
+            font-size: 2rem;
+        }
+
+        .projectsHeader p {
+            font-size: 1.1rem;
+            font-weight: var(--fw-400);
+            line-height: 1.5;
+            text-align: center;
+            padding: var(--padding-small) 0;
+        }
+
+        .tagFilterContainer {
+            padding: 0 var(--padding-normal);
+        }
+
+        .projectCard {
+            min-height: 450px;
+            max-height: 700px;
+            max-width: 100%;
+        }
+    }
+}

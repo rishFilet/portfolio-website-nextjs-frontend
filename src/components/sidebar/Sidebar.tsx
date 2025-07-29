@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import Separator from '@/components/separator/Separator';
 
-import { links as allMenuLinks } from '../navbar/Navbar.constants';
+import { visibleLinks } from '../navbar/Navbar.constants';
 import { NavbarLink } from '../navbar/Navbar.types';
 
 import styles from './Sidebar.module.css';
@@ -28,7 +28,7 @@ const Sidebar = (props: SidebarProps) => {
       )}
     >
       <div className={styles.childSidebarContainer}>
-        {allMenuLinks.map((link: NavbarLink, idx) => (
+        {visibleLinks.map((link: NavbarLink, idx) => (
           <div key={`${idx + link.name}`}>
             <Link
               href={link.path}

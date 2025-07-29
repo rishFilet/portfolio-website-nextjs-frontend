@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useWindowWidth } from '@/lib/hooks/useWindowWidth';
 
 import ImageComponent from '../image/Image';
-import { links as allMenuLinks } from '../navbar/Navbar.constants';
+import { visibleLinks } from '../navbar/Navbar.constants';
 import { useScroll } from '../scrollProvider/ScrollProvider';
 import { useTheme } from '../themeProvider/ThemeProvider';
 import { ThemeSwitcher } from '../themeSwitcher/ThemeSwitcher';
@@ -64,7 +64,7 @@ const Navbar = (props: NavbarProps) => {
             )}
           </Link>
           <div className={styles.menuItemsContainer}>
-            {allMenuLinks.map((link: NavbarLink, idx) => (
+            {visibleLinks.map((link: NavbarLink, idx) => (
               <div key={`${idx + link.name}`}>
                 <Link
                   href={link.path}

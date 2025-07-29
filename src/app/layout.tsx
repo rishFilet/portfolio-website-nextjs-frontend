@@ -82,9 +82,12 @@ export const initialThemeData: ThemeDataType = {
   uniqueName: 'light',
   fontAwesomeIcon: 'fas fa-sun',
   primaryColorHexCode: '#ffffff',
+  primaryColorAltHexCode: null,
   secondaryColorHexCode: '#000000',
+  secondaryColorAltHexCode: null,
   fontColorHexCode: '#000000',
   accentColorHexCode: '#2bb1a5',
+  accentColorAltHexCode: null,
   logo: {
     alternativeText: '',
     formats: {

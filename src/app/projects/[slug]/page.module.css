@@ -1,0 +1,240 @@
+@layer page {
+    .projectDetailContainer {
+        max-width: 60rem;
+        margin: 0 auto;
+        padding: 0 var(--padding-large);
+    }
+
+    .projectMetaDataContainer {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-large);
+        margin-bottom: 2rem;
+    }
+
+    .heroImageContainer {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+    }
+
+    .subHeaderInfo {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-small);
+    }
+
+    .subHeaderInfo h5 {
+        font-size: 1.1rem;
+        font-weight: var(--fw-500);
+        margin: 0;
+        padding: 0;
+    }
+
+    .subHeaderInfoDetails {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-small);
+        opacity: 0.7;
+    }
+
+    .aspectRatioContainer {
+        aspect-ratio: 16/9;
+        width: 100%;
+        border-radius: 0.7rem;
+        margin-bottom: 2rem;
+    }
+
+    .projectImageContainer {
+        height: 100%;
+        width: 100%;
+        border-radius: 0.7rem;
+    }
+
+    .projectContentContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .projectLinks {
+        display: flex;
+        gap: var(--gap-normal);
+        flex-wrap: wrap;
+    }
+
+    .projectLink {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .projectLink:hover {
+        background-color: var(--color-secondary);
+        color: var(--color-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .projectLink i {
+        font-size: 1rem;
+    }
+
+    .technologiesContainer {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-normal);
+    }
+
+    .technologiesContainer h4 {
+        font-size: 1.2rem;
+        font-weight: var(--fw-500);
+        margin: 0;
+        padding: 0;
+    }
+
+    .technologyTags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-small);
+    }
+
+    .technologyTag {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .codeTag {
+        font-family: var(--font-family-monospace);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .inlineCodeTag {
+        font-family: var(--font-family-monospace);
+        background-color: var(--color-codeblock);
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-size: 0.9rem;
+    }
+
+    /* Markdown content styling */
+    .projectContentContainer h1,
+    .projectContentContainer h2,
+    .projectContentContainer h3,
+    .projectContentContainer h4,
+    .projectContentContainer h5,
+    .projectContentContainer h6 {
+        text-align: left;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .projectContentContainer h1 {
+        font-size: 2rem;
+        font-weight: var(--fw-700);
+    }
+
+    .projectContentContainer h2 {
+        font-size: 1.5rem;
+        font-weight: var(--fw-600);
+    }
+
+    .projectContentContainer h3 {
+        font-size: 1.3rem;
+        font-weight: var(--fw-600);
+    }
+
+    .projectContentContainer p {
+        text-align: left;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .projectContentContainer ul,
+    .projectContentContainer ol {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+    }
+
+    .projectContentContainer li {
+        margin-bottom: 0.5rem;
+    }
+
+    .projectContentContainer blockquote {
+        border-left: 4px solid var(--color-accent);
+        padding-left: 1rem;
+        margin: 1rem 0;
+        font-style: italic;
+        opacity: 0.8;
+    }
+
+    .projectContentContainer table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+    }
+
+    .projectContentContainer th,
+    .projectContentContainer td {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 0.5rem;
+        text-align: left;
+    }
+
+    .projectContentContainer th {
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        font-weight: var(--fw-500);
+    }
+
+    @media screen and (max-width: 48rem) {
+        .projectDetailContainer {
+            padding: 0 var(--padding-normal);
+        }
+
+        .projectMetaDataContainer {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--gap-normal);
+        }
+
+        .projectLinks {
+            flex-direction: column;
+        }
+
+        .projectLink {
+            justify-content: center;
+        }
+
+        .technologyTags {
+            justify-content: center;
+        }
+
+        .projectContentContainer h1 {
+            font-size: 1.5rem;
+        }
+
+        .projectContentContainer h2 {
+            font-size: 1.3rem;
+        }
+
+        .projectContentContainer h3 {
+            font-size: 1.1rem;
+        }
+    }
+}

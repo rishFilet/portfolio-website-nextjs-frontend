@@ -53,6 +53,16 @@ const nextConfig: NextConfig = {
         hostname: 'supabase.rishikhan.dev',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      },
     ],
   },
 };

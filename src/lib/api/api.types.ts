@@ -23,12 +23,15 @@ export type MediaType = {
 } & MediaFormatType;
 
 export type ThemeDataType = {
+  accentColorAltHexCode: string | null;
   accentColorHexCode: string;
   fontAwesomeIcon: string;
   fontColorHexCode: string;
   heroImage: MediaType;
   logo: MediaType;
+  primaryColorAltHexCode: string | null;
   primaryColorHexCode: string;
+  secondaryColorAltHexCode: string | null;
   secondaryColorHexCode: string;
   uniqueName: string;
 };
@@ -59,4 +62,22 @@ export type SocialLinkDataType = {
   displayName: string;
   iconShortcode: string;
   link: string;
+};
+
+export type ProjectDataType = {
+  content: string;
+  createdAt: string;
+  description: string;
+  githubUrl?: string;
+  liveDemoUrl?: string;
+  projectImages: {
+    isMain: boolean;
+    mediaFiles: MediaType[];
+    order: number;
+  }[];
+  shortDescription: string;
+  slug: string;
+  tags?: { name: string }[];
+  technologies?: { name: string }[];
+  title: string;
 };
