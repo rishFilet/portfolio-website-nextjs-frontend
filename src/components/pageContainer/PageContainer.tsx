@@ -6,7 +6,7 @@ import { useScroll } from '../scrollProvider/ScrollProvider';
 
 import styles from './PageContainer.module.css';
 
-function pageContainer({
+function PageContainer({
   children,
   className,
 }: {
@@ -39,4 +39,4 @@ function pageContainer({
   );
 }
 
-export default pageContainer;
+export default PageContainer;

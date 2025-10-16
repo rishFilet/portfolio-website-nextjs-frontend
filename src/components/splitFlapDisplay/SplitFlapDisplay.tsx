@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SplitFlapDisplay from 'react-split-flap-display';
 import * as CharacterSetConstants from 'react-split-flap-display/constants';
 
@@ -50,6 +50,16 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
   const [seconds, setSeconds] = useState(switchStringDelayMs / 1000);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const rotateString = useCallback(() => {
+    if (listOfValues && listOfValues.length > 0) {
+      const nextIndex = (currentIndex + 1) % listOfValues.length;
+      setCurrentIndex(nextIndex);
+      setCurrentValue(listOfValues[nextIndex] || value);
+    } else {
+      setCurrentValue(value);
+    }
+  }, [currentIndex, listOfValues, value]);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setSeconds((prevSeconds) =>
@@ -61,17 +71,7 @@ const SplitFlapDisplayComponent = (props: SplitFlapDisplayComponentProps) => {
     }, 1000);
 
     return () => clearInterval(intervalId); // Cleanup on unmount or when isActive changes
-  }, [seconds]);
-
-  const rotateString = () => {
-    if (listOfValues && listOfValues.length > 0) {
-      const nextIndex = (currentIndex + 1) % listOfValues.length;
-      setCurrentIndex(nextIndex);
-      setCurrentValue(listOfValues[nextIndex] || value);
-    } else {
-      setCurrentValue(value);
-    }
-  };
+  }, [seconds, rotateString, switchStringDelayMs]);
 
   return (
     <div

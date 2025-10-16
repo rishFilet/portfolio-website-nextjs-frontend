@@ -1,6 +1,7 @@
 /**
  * Debug utility for API issues
  */
+/* eslint-disable no-console */
 
 import { API_IDS } from './api.constants';
 import { getStrapiData } from './api.helpers';

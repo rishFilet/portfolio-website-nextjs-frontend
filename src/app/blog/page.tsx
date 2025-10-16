@@ -13,7 +13,7 @@ const Blog = async () => {
 
   try {
     blogPosts = await getBlogPosts();
-  } catch (error) {
+  } catch {
     // Return empty array to prevent build failure
     blogPosts = [];
   }

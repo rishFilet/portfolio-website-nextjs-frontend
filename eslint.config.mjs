@@ -1,11 +1,9 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
-import _import from 'eslint-plugin-import';
 import react from 'eslint-plugin-react';
 import typescriptSortKeys from 'eslint-plugin-typescript-sort-keys';
 
@@ -23,12 +21,12 @@ export default [
     'plugin:react/jsx-runtime',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'next/core-web-vitals',
     'plugin:prettier/recommended',
   ),
   {
     plugins: {
       react,
-      import: fixupPluginRules(_import),
       'typescript-sort-keys': typescriptSortKeys,
     },
 

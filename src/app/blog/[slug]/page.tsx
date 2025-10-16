@@ -26,7 +26,7 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
   let post;
   try {
     post = await getBlogPostsBySlug(slug);
-  } catch (error) {
+  } catch {
     post = null;
   }
 
@@ -141,7 +141,7 @@ export async function generateStaticParams() {
     return posts.map((post: BlogDataType) => ({
       slug: post.slug,
     }));
-  } catch (error) {
+  } catch {
     // Return empty array to prevent build failure
     return [];
   }

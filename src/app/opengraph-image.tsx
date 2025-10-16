@@ -16,7 +16,11 @@ export default async function Image() {
           justifyContent: 'center',
         }}
       >
-        <img src={URL.createObjectURL(new Blob([logoSrc]))} height="100" />
+        <img
+          src={URL.createObjectURL(new Blob([logoSrc]))}
+          height="100"
+          alt="Rishi Khan Portfolio Logo"
+        />
       </div>
     ),
   );
