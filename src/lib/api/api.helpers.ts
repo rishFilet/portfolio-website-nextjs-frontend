@@ -21,11 +21,18 @@ import type {
 
 export async function apiHandler<T>(request: Request): Promise<Record<string, T>> {
   try {
+    // Add timeout to prevent hanging builds
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
     const response = await fetch(request, {
+      signal: controller.signal,
       next: {
         revalidate: 5, //TODO: Update this when launched live
       },
     });
+
+    clearTimeout(timeoutId);
 
     if (response.status === successStatusCodes[request.method as HttpMethod]) {
       return response.json();
@@ -41,6 +48,11 @@ export async function getStrapiData<T>({
   endpoint,
   populate = 'populate=*',
 }: GetStrapiDataParams): Promise<T> {
+  // Fail fast if BASE_API_URL is not configured
+  if (!BASE_API_URL) {
+    return [] as T;
+  }
+
   const url = `${BASE_API_URL}/api/${endpoint}?${populate}`;
 
   // Only include Authorization header if token is available
@@ -63,13 +75,9 @@ export async function getStrapiData<T>({
     return new Promise((resolve) => {
       resolve(data);
     });
-  } catch (error) {
-    // If it's a 401 error, it means the API token is missing or invalid
-    if (error instanceof Error && error.message.includes('401')) {
-      // Return empty data to prevent build failure
-      return [] as T;
-    }
-    throw error;
+  } catch {
+    // Return empty data to prevent build failure
+    return [] as T;
   }
 }
 

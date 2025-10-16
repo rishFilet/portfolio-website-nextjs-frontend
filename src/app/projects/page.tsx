@@ -140,6 +140,9 @@ const initialProjectsData: ProjectProps[] = [
   },
 ];
 
+// Force dynamic rendering to prevent build failures
+export const dynamic = 'force-dynamic';
+
 const Projects = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

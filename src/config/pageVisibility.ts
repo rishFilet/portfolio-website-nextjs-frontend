@@ -1,13 +1,13 @@
 export const PAGE_VISIBILITY_CONFIG = {
   // Main pages
   home: true,
-  about: false, // Turn off for testing
-  projects: false, // Turn off for testing
+  about: true,
+  projects: true,
   blog: true,
 
   // Dynamic pages (these inherit from their parent)
-  projectDetails: false, // Inherits from projects
-  blogPost: true, // Inherits from blog
+  projectDetails: true,
+  blogPost: true,
 
   // Other pages
   contact: true,

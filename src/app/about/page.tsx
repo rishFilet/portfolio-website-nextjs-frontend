@@ -1,10 +1,10 @@
 import {
-  faBook,
-  faHiking,
-  faMusic,
-  faCamera,
-  faGamepad,
-  faPalette,
+    faBook,
+    faHiking,
+    faMusic,
+    faCamera,
+    faGamepad,
+    faPalette,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -12,6 +12,9 @@ import PageContainer from '@/components/pageContainer/PageContainer';
 import { PageVisibilityGuard } from '@/components/pageVisibility/PageVisibilityGuard';
 
 import styles from './page.module.css';
+
+// Force dynamic rendering to prevent build failures
+export const dynamic = 'force-dynamic';
 
 export default function AboutPage() {
   return (

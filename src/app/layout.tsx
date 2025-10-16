@@ -4,13 +4,13 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import {
-  Indie_Flower,
-  Inter,
-  Oswald,
-  Qwigley,
-  Roboto,
-  Bitter,
-  Raleway,
+    Indie_Flower,
+    Inter,
+    Oswald,
+    Qwigley,
+    Roboto,
+    Bitter,
+    Raleway,
 } from 'next/font/google';
 import Script from 'next/script';
 
@@ -121,11 +121,21 @@ const RootLayout = async ({
 
   try {
     themeData = await getThemes();
-    initialTheme = await getStaticThemes().then((themes) => themes[0]);
+    initialTheme = await getStaticThemes().then(
+      (themes) => themes[0] || initialThemeData,
+    );
   } catch {
     // Use fallback theme data
     themeData = [initialThemeData];
     initialTheme = initialThemeData;
+  }
+
+  // Final safety check to ensure initialTheme is never undefined
+  if (!initialTheme) {
+    initialTheme = initialThemeData;
+  }
+  if (!themeData || themeData.length === 0) {
+    themeData = [initialThemeData];
   }
 
   return (
