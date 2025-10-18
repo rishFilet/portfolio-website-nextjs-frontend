@@ -1,31 +1,68 @@
-'use client';
-
-import { useState, useMemo } from 'react';
+import { Suspense } from 'react';
 
 import PageContainer from '@/components/pageContainer/PageContainer';
 import { PageVisibilityGuard } from '@/components/pageVisibility/PageVisibilityGuard';
-import ProjectCard from '@/components/projectCard/ProjectCard';
-import TagFilter from '@/components/tagFilter/TagFilter';
+import { getProjectPosts } from '@/lib/supabase/queries';
 
 import styles from './page.module.css';
+import ProjectsClient from './ProjectsClient';
 
-type ProjectProps = {
-  cardDescription: string,
-  createdAt: string,
-  githubUrl?: string,
-  image?: {
-    height: number,
-    url: string,
-    width: number,
-  },
-  link: string,
-  liveDemoUrl?: string,
-  tags?: string[],
-  technologies?: string[],
-  title: string,
+// Force dynamic rendering to prevent build failures
+export const dynamic = 'force-dynamic';
+
+const Projects = async () => {
+  const projects = await getProjectPosts();
+
+  // Transform to format expected by ProjectCard
+  const projectsData = projects.map((project) => {
+    const mainImage = project.images?.find((img) => img.is_main);
+    return {
+      title: project.title,
+      cardDescription:
+        project.short_description || project.project_summary || '',
+      link: `/projects/${project.slug}`,
+      technologies: project.technologies?.map((t) => t.name) || [],
+      tags: project.tags?.map((t) => t.name) || [],
+      githubUrl: project.github_url || undefined,
+      liveDemoUrl: project.live_demo_url || undefined,
+      createdAt: project.created_at,
+      image: mainImage
+        ? {
+            height: 450,
+            url: mainImage.image_url,
+            width: 800,
+          }
+        : undefined,
+    };
+  });
+
+  return (
+    <PageVisibilityGuard pageKey="projects">
+      <PageContainer>
+        <div className={styles.headerContainer}>
+          <div className={styles.projectsHeader}>
+            <h1>Project Portfolio</h1>
+            <p>
+              Discover innovative solutions I&apos;ve built for climate
+              technology, space exploration, renewable energy, and sustainable
+              automation systems.
+            </p>
+          </div>
+        </div>
+
+        <Suspense fallback={<div>Loading projects...</div>}>
+          <ProjectsClient projects={projectsData} />
+        </Suspense>
+      </PageContainer>
+    </PageVisibilityGuard>
+  );
 };
 
-const initialProjectsData: ProjectProps[] = [
+export default Projects;
+
+// Keep the old hardcoded data as fallback (commented out)
+/*
+const initialProjectsData = [
   {
     title: 'Climate Data Analytics Platform',
     cardDescription:
@@ -139,91 +176,4 @@ const initialProjectsData: ProjectProps[] = [
     },
   },
 ];
-
-// Force dynamic rendering to prevent build failures
-export const dynamic = 'force-dynamic';
-
-const Projects = () => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
-  // Extract all unique tags from projects
-  const allTags = useMemo(() => {
-    const tagsSet = new Set<string>();
-    initialProjectsData.forEach((project) => {
-      project.tags?.forEach((tag) => tagsSet.add(tag));
-    });
-    return Array.from(tagsSet).sort();
-  }, []);
-
-  // Filter projects based on selected tags
-  const filteredProjects = useMemo(() => {
-    if (selectedTags.length === 0) {
-      return initialProjectsData;
-    }
-
-    return initialProjectsData.filter((project) => {
-      if (!project.tags) return false;
-      return selectedTags.some((tag) => project.tags?.includes(tag));
-    });
-  }, [selectedTags]);
-
-  const handleTagToggle = (tag: string) => {
-    setSelectedTags((prev) => {
-      if (prev.includes(tag)) {
-        return prev.filter((t) => t !== tag);
-      } else {
-        return [...prev, tag];
-      }
-    });
-  };
-
-  const handleClearFilters = () => {
-    setSelectedTags([]);
-  };
-
-  return (
-    <PageVisibilityGuard pageKey="projects">
-      <PageContainer>
-        <div className={styles.headerContainer}>
-          <div className={styles.projectsHeader}>
-            <h1>Project Portfolio</h1>
-            <p>
-              Discover innovative solutions I&apos;ve built for climate
-              technology, space exploration, renewable energy, and sustainable
-              automation systems.
-            </p>
-          </div>
-        </div>
-
-        <div className={styles.tagFilterContainer}>
-          <TagFilter
-            allTags={allTags}
-            selectedTags={selectedTags}
-            onTagToggle={handleTagToggle}
-            onClearFilters={handleClearFilters}
-          />
-        </div>
-
-        <div className={styles.projectsGrid}>
-          {filteredProjects.map((data: ProjectProps) => {
-            return (
-              <ProjectCard
-                key={`${data.title}-${data.createdAt}`}
-                title={data.title}
-                description={data.cardDescription}
-                tags={data.tags}
-                link={data.link}
-                githubUrl={data.githubUrl}
-                liveDemoUrl={data.liveDemoUrl}
-                image={data.image}
-                classNames={{ cardContainer: styles.projectCard }}
-              />
-            );
-          })}
-        </div>
-      </PageContainer>
-    </PageVisibilityGuard>
-  );
-};
-
-export default Projects;
+*/

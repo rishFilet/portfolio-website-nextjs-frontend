@@ -8,9 +8,7 @@ import ImageComponent from '@/components/image/Image';
 import PageContainer from '@/components/pageContainer/PageContainer';
 import { PageVisibilityGuard } from '@/components/pageVisibility/PageVisibilityGuard';
 import Separator from '@/components/separator/Separator';
-import { API_IDS } from '@/lib/api/api.constants';
-import { getBlogPostsBySlug, getStrapiData } from '@/lib/api/api.helpers';
-import { BlogDataType } from '@/lib/api/api.types';
+import { getBlogPostBySlug } from '@/lib/supabase/queries';
 import { convertDateToHumanReadable } from '@/lib/utils/date.helpers';
 import { calculateReadingTime } from '@/lib/utils/string.helpers';
 
@@ -25,7 +23,7 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
 
   let post;
   try {
-    post = await getBlogPostsBySlug(slug);
+    post = await getBlogPostBySlug(slug);
   } catch {
     post = null;
   }
@@ -43,8 +41,7 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
     );
   }
 
-  const image = post?.postImages.find((image) => image.order === 1)
-    ?.mediaFiles[0].formats?.medium;
+  const mainImage = post?.images?.find((image) => image.is_main);
 
   return (
     <PageVisibilityGuard pageKey="blogPost">
@@ -55,20 +52,20 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
           <div className={styles.subHeaderInfo}>
             <h5>Rishi Khan</h5>
             <div className={styles.subHeaderInfoDetails}>
-              <h6>{convertDateToHumanReadable(post.createdAt)}</h6>
+              <h6>{convertDateToHumanReadable(post.created_at)}</h6>
               <p dangerouslySetInnerHTML={{ __html: '&#x00B7;' }} />
-              <h6>{calculateReadingTime([post.postContent])} min read</h6>
+              <h6>{calculateReadingTime([post.post_content])} min read</h6>
             </div>
           </div>
         </div>
-        {image && (
+        {mainImage && (
           <div className={styles.aspectRatioContainer}>
             <div className={styles.cardImageContainer}>
               <ImageComponent
-                src={image.url}
-                alt={image.name}
-                height={image.height}
-                width={image.width}
+                src={mainImage.image_url}
+                alt={mainImage.image_name || post.title}
+                height={450}
+                width={800}
                 style={{ borderRadius: '0.5rem' }}
               />
             </div>
@@ -114,7 +111,7 @@ const BlogPostPage = async ({ params }: { params: Params }) => {
               },
             }}
           >
-            {post.postContent}
+            {post.post_content}
           </ReactMarkdown>{' '}
           <Separator
             orientation="horizontal"
@@ -130,19 +127,3 @@ export default BlogPostPage;
 
 // Force dynamic rendering to prevent build failures
 export const dynamic = 'force-dynamic';
-
-export async function generateStaticParams() {
-  try {
-    const posts = await getStrapiData<BlogDataType[]>({
-      endpoint: API_IDS.blogPosts,
-      populate: 'filters[publishedAt][$notNull]=true',
-    });
-
-    return posts.map((post: BlogDataType) => ({
-      slug: post.slug,
-    }));
-  } catch {
-    // Return empty array to prevent build failure
-    return [];
-  }
-}

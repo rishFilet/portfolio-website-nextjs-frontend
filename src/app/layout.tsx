@@ -2,27 +2,23 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import clsx from 'clsx';
 import {
-    Indie_Flower,
-    Inter,
-    Oswald,
-    Qwigley,
-    Roboto,
-    Bitter,
-    Raleway,
+  Indie_Flower,
+  Inter,
+  Oswald,
+  Qwigley,
+  Roboto,
+  Bitter,
+  Raleway,
 } from 'next/font/google';
 import Script from 'next/script';
 
 import '@/styles/reset.css'; // Import reset styles first
 import '@/styles/globals.css'; // Import global styles next
 
-import styles from '@/app/layout.module.css'; // Import layout styles
 import { Providers } from '@/app/providers';
-import Navigation from '@/components/navigation/Navigation'; // Import component styles
-import { getThemes } from '@/lib/api/api.helpers';
 import type { MediaFormatType, ThemeDataType } from '@/lib/api/api.types';
-import { getStaticThemes } from '@/lib/utils/theme.server';
+import { getCurrentTheme, getStaticThemes } from '@/lib/utils/theme.server';
 
 library.add(fas, far, fab);
 
@@ -120,10 +116,8 @@ const RootLayout = async ({
   let initialTheme;
 
   try {
-    themeData = await getThemes();
-    initialTheme = await getStaticThemes().then(
-      (themes) => themes[0] || initialThemeData,
-    );
+    themeData = await getStaticThemes();
+    initialTheme = await getCurrentTheme();
   } catch {
     // Use fallback theme data
     themeData = [initialThemeData];
@@ -150,22 +144,7 @@ const RootLayout = async ({
             strategy="afterInteractive"
           />
           <Providers theme={initialTheme} allThemes={themeData}>
-            <div
-              className={clsx(
-                styles.siteContainer,
-                initialTheme.uniqueName === 'none' && styles.loading,
-              )}
-            >
-              <Navigation />
-              <main
-                className={clsx(
-                  styles.main,
-                  initialTheme.uniqueName === 'none' && styles.loading,
-                )}
-              >
-                {children}
-              </main>
-            </div>
+            {children}
           </Providers>
         </body>
       </html>

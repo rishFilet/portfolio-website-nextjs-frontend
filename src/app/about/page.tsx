@@ -1,10 +1,10 @@
 import {
-    faBook,
-    faHiking,
-    faMusic,
-    faCamera,
-    faGamepad,
-    faPalette,
+  faBook,
+  faHiking,
+  faMusic,
+  faCamera,
+  faGamepad,
+  faPalette,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

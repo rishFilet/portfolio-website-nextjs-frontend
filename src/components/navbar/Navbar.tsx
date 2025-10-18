@@ -30,6 +30,15 @@ const Navbar = (props: NavbarProps) => {
 
   const logo = currentTheme.logo;
 
+  // Get logo URL, checking multiple possible locations
+  const logoUrl =
+    logo?.url ||
+    logo?.formats?.large?.url ||
+    logo?.formats?.medium?.url ||
+    logo?.formats?.small?.url;
+
+  const hasLogo = logoUrl && logoUrl.trim() !== '';
+
   // Update sidebar visibility when mobile state changes
   useEffect(() => {
     if (props.setSideBarVisibility) {
@@ -54,12 +63,12 @@ const Navbar = (props: NavbarProps) => {
             )}
             href="/"
           >
-            {logo && (
+            {hasLogo && (
               <ImageComponent
-                alt={logo.name || 'Logo'}
-                src={logo.formats?.small?.url || ''}
-                height={logo.formats?.small?.height || 40}
-                width={logo.formats?.small?.width || 40}
+                alt={logo?.name || 'Logo'}
+                src={logoUrl}
+                height={logo?.formats?.small?.height || logo?.height || 40}
+                width={logo?.formats?.small?.width || logo?.width || 40}
               />
             )}
           </Link>

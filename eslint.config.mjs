@@ -55,6 +55,7 @@ export default [
 
       '@typescript-eslint/no-unused-expressions': 'warn',
       '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'object-curly-spacing': ['error', 'always'],

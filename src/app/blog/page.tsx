@@ -1,22 +1,14 @@
 import Card from '@/components/card/Card';
 import PageContainer from '@/components/pageContainer/PageContainer';
 import { PageVisibilityGuard } from '@/components/pageVisibility/PageVisibilityGuard';
-import { getBlogPosts } from '@/lib/api/api.helpers';
-import { BlogDataType } from '@/lib/api/api.types';
+import { getBlogPosts } from '@/lib/supabase/queries';
 import { convertDateToHumanReadable } from '@/lib/utils/date.helpers';
 import { calculateReadingTime } from '@/lib/utils/string.helpers';
 
 import styles from './page.module.css';
 
 const Blog = async () => {
-  let blogPosts: BlogDataType[] = [];
-
-  try {
-    blogPosts = await getBlogPosts();
-  } catch {
-    // Return empty array to prevent build failure
-    blogPosts = [];
-  }
+  const blogPosts = await getBlogPosts();
 
   if (blogPosts.length === 0) {
     return (
@@ -34,23 +26,25 @@ const Blog = async () => {
   return (
     <PageVisibilityGuard pageKey="blog">
       <PageContainer>
-        {blogPosts.map((data: BlogDataType) => {
+        {blogPosts.map((post) => {
+          const mainImage = post.images?.find((img) => img.is_main);
           return (
             <Card
-              key={`${data.slug}-${data.createdAt}`}
-              title={data.title}
-              description={data.postSummary}
+              key={post.id}
+              title={post.title}
+              description={post.post_summary || ''}
               image={
-                data.postImages.find((image) => image.isMain)?.mediaFiles[0]
-                  .formats?.medium
+                mainImage
+                  ? { url: mainImage.image_url, height: 450, width: 800 }
+                  : undefined
               }
-              link={`/blog/${data.slug}`}
-              tags={data.tags?.map((tag) => tag.name)}
+              link={`/blog/${post.slug}`}
+              tags={post.tags?.map((tag) => tag.name)}
               classNames={{ cardContainer: styles.cardContainer }}
             >
-              <h6>{convertDateToHumanReadable(data.createdAt)}</h6>
+              <h6>{convertDateToHumanReadable(post.created_at)}</h6>
               <p dangerouslySetInnerHTML={{ __html: '&#x00B7;' }} />
-              <h6>{calculateReadingTime([data.postContent])} min read</h6>
+              <h6>{calculateReadingTime([post.post_content])} min read</h6>
             </Card>
           );
         })}

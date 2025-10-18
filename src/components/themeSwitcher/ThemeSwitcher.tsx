@@ -1,6 +1,6 @@
 'use client';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Switch from 'react-switch';
 
 import type { ThemeDataType } from '@/lib/api/api.types';
@@ -16,6 +16,11 @@ export function ThemeSwitcher() {
   const [switchChecked, setSwitchChecked] = useState(
     currentTheme?.uniqueName === 'light',
   );
+
+  // Sync switchChecked state with currentTheme changes
+  useEffect(() => {
+    setSwitchChecked(currentTheme?.uniqueName === 'light');
+  }, [currentTheme]);
 
   const darkTheme = themes.find((theme) => theme.uniqueName === 'dark');
   const lightTheme = themes.find((theme) => theme.uniqueName === 'light');

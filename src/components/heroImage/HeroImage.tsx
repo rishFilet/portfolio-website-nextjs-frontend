@@ -18,12 +18,14 @@ const HeroImage = (props: HeroImageProps) => {
 
   const heroImage = currentTheme.heroImage;
 
-  // Check if we have valid image data
-  const hasValidImage =
-    heroImage &&
-    (heroImage.formats.small?.url ||
-      heroImage.formats.medium?.url ||
-      heroImage.formats.large?.url);
+  // Check if we have valid image data - check the URL field directly
+  const imageUrl =
+    heroImage?.url ||
+    heroImage?.formats?.large?.url ||
+    heroImage?.formats?.medium?.url ||
+    heroImage?.formats?.small?.url;
+
+  const hasValidImage = imageUrl && imageUrl.trim() !== '';
 
   // If no valid image, show a placeholder
   if (!hasValidImage) {
@@ -53,22 +55,20 @@ const HeroImage = (props: HeroImageProps) => {
   return (
     <div className={clsx(styles.heroImageContainer, className)}>
       <ImageComponent
-        alt={heroImage.alternativeText || 'Hero Image'}
-        src={
-          heroImage.formats.large?.url ||
-          heroImage.formats.medium?.url ||
-          heroImage.formats.small.url
-        }
+        alt={heroImage?.alternativeText || 'Hero Image'}
+        src={imageUrl}
         height={
-          heroImage.formats.large?.height ||
-          heroImage.formats.medium?.height ||
-          heroImage.formats.small?.height ||
+          heroImage?.formats?.large?.height ||
+          heroImage?.formats?.medium?.height ||
+          heroImage?.formats?.small?.height ||
+          heroImage?.height ||
           200
         }
         width={
-          heroImage.formats.large?.width ||
-          heroImage.formats.medium?.width ||
-          heroImage.formats.small?.width ||
+          heroImage?.formats?.large?.width ||
+          heroImage?.formats?.medium?.width ||
+          heroImage?.formats?.small?.width ||
+          heroImage?.width ||
           200
         }
         style={{

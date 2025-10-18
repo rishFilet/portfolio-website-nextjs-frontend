@@ -19,7 +19,9 @@ import type {
   ThemeDataType,
 } from './api.types';
 
-export async function apiHandler<T>(request: Request): Promise<Record<string, T>> {
+export async function apiHandler<T>(
+  request: Request,
+): Promise<Record<string, T>> {
   try {
     // Add timeout to prevent hanging builds
     const controller = new AbortController();
@@ -37,7 +39,9 @@ export async function apiHandler<T>(request: Request): Promise<Record<string, T>
     if (response.status === successStatusCodes[request.method as HttpMethod]) {
       return response.json();
     } else {
-      throw new Error(`API request failed with status ${response.status}: ${response.statusText}`);
+      throw new Error(
+        `API request failed with status ${response.status}: ${response.statusText}`,
+      );
     }
   } catch {
     throw new Error('Something went wrong on API server!');
@@ -101,7 +105,11 @@ export const getLandingPageData = cache(async () => {
     return {
       description: 'Creative Engineer & Full Stack Developer',
       header: 'Rishi Khan',
-      commaSeparatedSubHeadersList: ['Full Stack Developer', 'UI/UX Designer', 'Problem Solver'],
+      commaSeparatedSubHeadersList: [
+        'Full Stack Developer',
+        'UI/UX Designer',
+        'Problem Solver',
+      ],
     };
   }
 });
@@ -148,7 +156,9 @@ export const getBlogPosts = cache(async () => {
       })
       .sort((a, b) => {
         // Sort by creation date (newest first)
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       });
 
     return uniquePosts;
@@ -175,7 +185,8 @@ export const getBlogPostsBySlug = cache(async (slug: string) => {
 
     // Return the most recent one
     const mostRecent = postsWithSlug.sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )[0];
 
     return mostRecent;
@@ -194,7 +205,8 @@ export const getLatestBlogPost = cache(async () => {
     }
 
     return posts.sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )[0];
   } catch {
     // Return null to prevent build failure

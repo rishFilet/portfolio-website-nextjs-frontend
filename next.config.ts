@@ -39,6 +39,18 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '54321',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '54331',
+        pathname: '/storage/**',
+      },
+      {
         protocol: 'https',
         hostname: 'img.icons8.com',
         pathname: '/**',
