@@ -153,3 +153,7 @@ const RootLayout = async ({
 };
 
 export default RootLayout;
+
+// Disable caching for the root layout
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
