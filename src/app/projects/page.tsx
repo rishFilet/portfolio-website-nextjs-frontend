@@ -7,8 +7,9 @@ import { getProjectPosts } from '@/lib/supabase/queries';
 import styles from './page.module.css';
 import ProjectsClient from './ProjectsClient';
 
-// Force dynamic rendering to prevent build failures
+// Force dynamic rendering and disable caching
 export const dynamic = 'force-dynamic';
+export const revalidate = 0; // Disable caching completely
 
 const Projects = async () => {
   const projects = await getProjectPosts();
