@@ -1,14 +1,14 @@
 import Card from '@/components/card/Card';
 import PageContainer from '@/components/pageContainer/PageContainer';
 import { PageVisibilityGuard } from '@/components/pageVisibility/PageVisibilityGuard';
-import { getBlogPosts } from '@/lib/supabase/queries';
+import { getPublicBlogPosts } from '@/lib/supabase/queries-public';
 import { convertDateToHumanReadable } from '@/lib/utils/date.helpers';
 import { calculateReadingTime } from '@/lib/utils/string.helpers';
 
 import styles from './page.module.css';
 
 const Blog = async () => {
-  const blogPosts = await getBlogPosts();
+  const blogPosts = await getPublicBlogPosts();
 
   if (blogPosts.length === 0) {
     return (
@@ -55,6 +55,5 @@ const Blog = async () => {
 
 export default Blog;
 
-// Force dynamic rendering and disable caching
+// Force dynamic rendering to fetch fresh data on each request
 export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Disable caching completely

@@ -7,7 +7,7 @@ import PageContainer from '@/components/pageContainer/PageContainer';
 import SocialLinks from '@/components/socialLinks/SocialLinks';
 import SplitFlapDisplayComponent from '@/components/splitFlapDisplay/SplitFlapDisplay';
 import type { ThemeDataType } from '@/lib/api/api.types';
-import { getLandingPageData, getLatestBlogPost } from '@/lib/supabase/queries';
+import { getPublicLandingPageData, getPublicLatestBlogPost } from '@/lib/supabase/queries-public';
 
 import styles from './page.module.css';
 
@@ -16,9 +16,9 @@ export type HomePageProps = {
 };
 
 export default async function Home() {
-  // Fetch from Supabase
-  const landingPageData = await getLandingPageData();
-  const post = await getLatestBlogPost();
+  // Fetch from Supabase using cookieless public client
+  const landingPageData = await getPublicLandingPageData();
+  const post = await getPublicLatestBlogPost();
 
   // Extract data with fallbacks
   const header = landingPageData?.header || 'Rishi Khan';
@@ -88,6 +88,5 @@ export default async function Home() {
   );
 }
 
-// Force dynamic rendering and disable caching
+// Force dynamic rendering to fetch fresh data on each request
 export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Disable caching completely

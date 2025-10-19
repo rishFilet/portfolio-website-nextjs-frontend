@@ -2,17 +2,16 @@ import { Suspense } from 'react';
 
 import PageContainer from '@/components/pageContainer/PageContainer';
 import { PageVisibilityGuard } from '@/components/pageVisibility/PageVisibilityGuard';
-import { getProjectPosts } from '@/lib/supabase/queries';
+import { getPublicProjectPosts } from '@/lib/supabase/queries-public';
 
 import styles from './page.module.css';
 import ProjectsClient from './ProjectsClient';
 
-// Force dynamic rendering and disable caching
+// Force dynamic rendering to fetch fresh data on each request
 export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Disable caching completely
 
 const Projects = async () => {
-  const projects = await getProjectPosts();
+  const projects = await getPublicProjectPosts();
 
   // Transform to format expected by ProjectCard
   const projectsData = projects.map((project) => {
