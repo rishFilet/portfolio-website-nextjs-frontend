@@ -69,9 +69,10 @@ export default async function Icon() {
       return new Response(imageBuffer, {
         headers: {
           'Content-Type': contentType,
-          'Cache-Control': process.env.NODE_ENV === 'development' 
-            ? 'no-cache, no-store, must-revalidate' 
-            : 'public, max-age=3600, must-revalidate',
+          'Cache-Control':
+            process.env.NODE_ENV === 'development'
+              ? 'no-cache, no-store, must-revalidate'
+              : 'public, max-age=3600, must-revalidate',
         },
       });
     } catch (error) {
