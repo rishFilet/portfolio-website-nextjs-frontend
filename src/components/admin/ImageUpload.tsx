@@ -75,6 +75,13 @@ export default function ImageUpload({
         .from(bucket)
         .getPublicUrl(filePath);
 
+      console.log('🖼️ Image Upload Debug:', {
+        bucket,
+        filePath,
+        generatedUrl: urlData?.publicUrl,
+        supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      });
+
       if (urlData?.publicUrl) {
         setPreviewUrl(urlData.publicUrl);
         onImageUploaded(urlData.publicUrl);

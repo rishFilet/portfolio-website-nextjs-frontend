@@ -67,6 +67,17 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'api.supabase.rishikhan.dev',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'api.supabase.rishikhan.dev',
+        port: '54331',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'via.placeholder.com',
         pathname: '/**',
       },

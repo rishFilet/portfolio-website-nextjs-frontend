@@ -26,10 +26,11 @@ export const getLandingPageData = cache(async (): Promise<LandingPageContent | n
     const { data, error } = await (supabase as any)
       .from('landing_page_content')
       .select('*')
-      .single();
+      .order('updated_at', { ascending: false })
+      .limit(1);
 
     if (error) throw error;
-    return data;
+    return data && data.length > 0 ? data[0] : null;
   } catch (error) {
     console.error('Error fetching landing page data:', error);
     return null;
@@ -41,10 +42,14 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings | null> => {
   try {
     const supabase = await createServerSupabaseClient();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data, error } = await (supabase as any).from('site_settings').select('*').single();
+    const { data, error } = await (supabase as any)
+      .from('site_settings')
+      .select('*')
+      .order('updated_at', { ascending: false })
+      .limit(1);
 
     if (error) throw error;
-    return data;
+    return data && data.length > 0 ? data[0] : null;
   } catch (error) {
     console.error('Error fetching site settings:', error);
     return null;

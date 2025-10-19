@@ -35,18 +35,20 @@ export default function ContentManagementPage() {
   async function loadData() {
     setLoading(true);
     try {
-      // Load landing page
+      // Load landing page (get first row, there should only be one)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { data: lpData } = await (supabase as any)
         .from('landing_page_content')
         .select('*')
-        .single();
+        .order('updated_at', { ascending: false })
+        .limit(1);
 
-      if (lpData) {
-        setLandingPage(lpData);
-        setHeader(lpData.header);
-        setDescription(lpData.description);
-        setSubHeaders(lpData.sub_headers || '');
+      if (lpData && lpData.length > 0) {
+        const landingPageData = lpData[0];
+        setLandingPage(landingPageData);
+        setHeader(landingPageData.header || '');
+        setDescription(landingPageData.description || '');
+        setSubHeaders(landingPageData.sub_headers || '');
       }
 
       // Load social links
@@ -100,10 +102,14 @@ export default function ContentManagementPage() {
       setMessage('Landing page saved successfully!');
       await loadData();
     } catch (error) {
-      setMessage(
-        'Error saving: ' +
-          (error instanceof Error ? error.message : 'Unknown error'),
-      );
+      console.error('Full error object:', error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : typeof error === 'object' && error !== null
+            ? JSON.stringify(error)
+            : 'Unknown error';
+      setMessage('Error saving: ' + errorMessage);
     } finally {
       setSaving(false);
     }
@@ -130,10 +136,14 @@ export default function ContentManagementPage() {
       setMessage('Social link added!');
       await loadData();
     } catch (error) {
-      setMessage(
-        'Error adding social link: ' +
-          (error instanceof Error ? error.message : 'Unknown error'),
-      );
+      console.error('Full error object:', error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : typeof error === 'object' && error !== null
+            ? JSON.stringify(error)
+            : 'Unknown error';
+      setMessage('Error adding social link: ' + errorMessage);
     }
   }
 
@@ -152,10 +162,14 @@ export default function ContentManagementPage() {
       setMessage('Social link deleted!');
       await loadData();
     } catch (error) {
-      setMessage(
-        'Error deleting: ' +
-          (error instanceof Error ? error.message : 'Unknown error'),
-      );
+      console.error('Full error object:', error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : typeof error === 'object' && error !== null
+            ? JSON.stringify(error)
+            : 'Unknown error';
+      setMessage('Error deleting: ' + errorMessage);
     }
   }
 
