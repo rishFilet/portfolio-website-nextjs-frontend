@@ -24,9 +24,13 @@
   }
 
   .contentContainer {
-    height: 100%;
+    min-height: 0;
+    height: auto;
     padding: 1rem;
     max-width: 45rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .heroText {
@@ -35,6 +39,10 @@
     align-items: center;
     padding-top: 0;
     gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 
     & h1 {
       font-weight: var(--fw-700);
@@ -74,8 +82,15 @@
     justify-content: center;
     gap: 1rem;
     transition: all 0.5s ease-in-out;
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
     padding-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    min-height: 3rem;
   }
 
   .contentContainer {

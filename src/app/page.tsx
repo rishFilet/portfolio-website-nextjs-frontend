@@ -39,10 +39,11 @@ export default async function Home() {
           <div className={styles.splitFlapContainer}>
             <SplitFlapDisplayComponent
               listOfValues={commaSeparatedSubHeadersList}
-              characterWidth="2.2rem"
+              characterWidth="clamp(1.2rem, 4vw, 2.2rem)"
+              fontSize="clamp(0.8rem, 3vw, 1.2rem)"
               step={50}
               borderColor="var(--color-primary)"
-              borderWidth="3px"
+              borderWidth="2px"
               textColor="var(--color-primary)"
               background="var(--color-accent)"
             />

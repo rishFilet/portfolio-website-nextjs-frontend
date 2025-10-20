@@ -4,7 +4,17 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-width: 100vw;
     padding: 0;
     overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .innerContainer {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 }

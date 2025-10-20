@@ -3,20 +3,73 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 3rem;
+    height: auto;
     gap: 1em;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0 0.5rem;
   }
 
   .splitFlapDisplay {
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+
+    /* Target the inner wrapper from react-split-flap-display */
+    &>div {
+      max-width: 100% !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      box-sizing: border-box !important;
+    }
+
     & div {
       /* font-size: 0.8em; */
       font-weight: var(--fw-700);
-      padding: 0 1rem !important;
+      padding: 0 0.5rem !important;
       border-bottom: 2px;
+      box-sizing: border-box !important;
     }
 
     & div::after {
       content: none !important;
+    }
+  }
+
+  /* Scale down the entire display if it's too wide on small screens */
+  @media (max-width: 480px) {
+    .splitFlapDisplayContainer {
+      transform: scale(0.85);
+      transform-origin: center;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .splitFlapDisplayContainer {
+      transform: scale(0.7);
+      transform-origin: center;
+    }
+  }
+
+  /* Ensure visibility on small viewport heights */
+  @media (max-height: 937px) {
+    .splitFlapDisplayContainer {
+      min-height: 2.5rem;
+      height: auto;
+    }
+  }
+
+  @media (max-height: 600px) {
+    .splitFlapDisplayContainer {
+      min-height: 2rem;
+      height: auto;
     }
   }
 }
