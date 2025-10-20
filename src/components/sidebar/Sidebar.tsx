@@ -3,8 +3,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import Separator from '@/components/separator/Separator';
-
 import { visibleLinks } from '../navbar/Navbar.constants';
 import { NavbarLink } from '../navbar/Navbar.types';
 
@@ -35,13 +33,8 @@ const Sidebar = (props: SidebarProps) => {
               className={clsx(styles.menuItemsContainer)}
               onClick={props.toggleSidebar}
             >
-              <div className={styles.innerLinkContainer}>
-                {' '}
-                <span>{link.icon}</span>
-                {link.name}
-              </div>
+              <div className={styles.innerLinkContainer}> {link.name}</div>
             </Link>
-            <Separator orientation="horizontal" />
           </div>
         ))}
       </div>

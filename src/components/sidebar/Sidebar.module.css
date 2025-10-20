@@ -10,7 +10,7 @@
   .sidebarContainer {
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     margin-top: var(--navbar-height);
     position: fixed;
@@ -28,9 +28,11 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
-    gap: 3rem;
-    margin-top: 3rem;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 0 2rem;
   }
 
   .sidebarOpen {
@@ -42,20 +44,21 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-large);
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     width: 100%;
-    flex-grow: 1;
-    height: 100%;
     font-weight: var(--fw-700);
     font-size: 2rem;
     background-color: var(--color-secondary);
     color: var(--color-font);
+    padding: 0.5rem 0;
+    text-decoration: none;
   }
 
   .innerLinkContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
     gap: 0.5rem;
   }
